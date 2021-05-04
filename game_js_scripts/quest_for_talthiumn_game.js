@@ -59,7 +59,7 @@ var game =
   onload: function () 
   {
     // Initialize the video.
-    if (!me.video.init(640, 480, {wrapper : "screen", renderer: me.video.WEBGL, scale : "auto", scaleMethod : "flex-width", })) 
+    if (!me.video.init(800, 600, {wrapper : "screen", renderer: me.video.WEBGL, scale : "auto", scaleMethod : "flex-width", })) 
     {
       alert("Your browser does not support HTML5 canvas.");
       return;
@@ -139,10 +139,9 @@ var game =
     /*****************************/
       me.pool.register("game_enemy_manager", game.game_enemy_manager, false);
 
-    /*****************************************/
-    /* load the texture atlas file this      */
-    /* will be used by object entities later */
-    /*****************************************/
+    /************************************/
+    /* load the texture atlas file this */
+    /************************************/
       game.texture = new me.video.renderer.Texture(
         me.loader.getJSON("character_movement_right"),
         me.loader.getImage("character_movement_right")
