@@ -322,7 +322,7 @@ game.player_entity = me.Entity.extend(
           {
               this.player_current_states = player_states.player_climb_down;//player climb down game state
               this.playerMovement();
-          } 
+          }
 
         /**********************************/
         /* keypress right player crawling */
