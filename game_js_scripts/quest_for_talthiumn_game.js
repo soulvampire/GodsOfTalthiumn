@@ -210,6 +210,11 @@ var game =
       me.input.bindGamepad(0, {type:"axes", code: me.input.GAMEPAD.AXES.LY, threshold: -0.5}, me.input.KEY.UP);
 
     me.game.onLevelLoaded = this.collectObjects.bind(this);
+
+    me.event.subscribe(me.event.MOUSEMOVE, function (e) {
+      var x = e.gameWorldX/800;
+      var y = 1 - e.gameWorldY/600;
+      me.video.renderer.compositor.quadShader.uniforms.LightPos = [x, y, 0.05];
     // Start the game.
     me.state.change(me.state.PLAY);
   },
