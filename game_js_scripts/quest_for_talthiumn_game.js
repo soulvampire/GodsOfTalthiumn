@@ -108,7 +108,7 @@ var game =
       me.pool.register("climbable_ladder", game.platform_ladder_entity, true);
       me.pool.register("climbable_chain", game.platform_chain_entity, true);
       me.pool.register("floating_platform", game.moving_platform_entity, true);
-     me.pool.register("vanishing_platform", game.vanishing_platform_entity, true);
+      me.pool.register("vanishing_platform", game.vanishing_platform_entity, true);
 
     /**********************************/
     /* enemies entity effects object */
@@ -211,10 +211,6 @@ var game =
 
     me.game.onLevelLoaded = this.collectObjects.bind(this);
 
-    me.event.subscribe(me.event.MOUSEMOVE, function (e) {
-      var x = e.gameWorldX/800;
-      var y = 1 - e.gameWorldY/600;
-      me.video.renderer.compositor.quadShader.uniforms.LightPos = [x, y, 0.05];
     // Start the game.
     me.state.change(me.state.PLAY);
   },
