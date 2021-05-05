@@ -515,7 +515,7 @@
   <object id="381" type="platform_solid" x="3776" y="736" width="64" height="32"/>
   <object id="382" type="platform_solid" x="3904" y="736" width="64" height="32"/>
   <object id="383" type="platform_solid" x="3520" y="768" width="512" height="32"/>
-  <object id="386" type="paltform_solid" x="4095" y="1088" width="1" height="480"/>
+  <object id="386" type="paltform_solid" x="4087" y="1088" width="8" height="448"/>
   <object id="388" x="2432" y="448" width="320" height="32"/>
   <object id="389" type="platform_solid" x="2400" y="416" width="768" height="32"/>
   <object id="390" x="2336" y="416" width="32" height="32"/>
