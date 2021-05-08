@@ -33,7 +33,7 @@ game.generic_flame_entity = me.Entity.extend(
             me.game.world.removeChild(this);
         },
     
-      setDirection: function(explosion_direction) 
+      setDirection: function(flame_direction) 
       {
             this.body.vel.x = flame_direction.x * this.speed;
             this.body.vel.y = flame_direction.y * this.speed;
@@ -47,7 +47,7 @@ game.generic_flame_entity = me.Entity.extend(
         },
     });
     
-    game.small_trap_explode = game.generic_explosion_entity.extend(
+    game.small_trap_flame = game.generic_flame_entity.extend(
     {
       init : function (x, y, settings) 
       {
@@ -55,15 +55,15 @@ game.generic_flame_entity = me.Entity.extend(
             settings.image = "default_trap_flame";
             settings.name = "small_trap_flame";
             settings.width = 32;
-        settings.height = 32;
-        settings.explosion_hit_points = 6;
+            settings.height = 32;
+            settings.flame_hit_points = 6;
             settings.frameCount = 12;
-            this._super(game.generic_explosion_entity, 'init', [x, y, settings]);
+            this._super(game.generic_flame_entity, 'init', [x, y, settings]);
             this.body.setCollisionMask(me.collision.types.NO_OBJECT);
         },
     });
     
-    game.large_trap_explode = game.generic_explosion_entity.extend(
+    game.large_trap_explode = game.generic_flame_entity.extend(
         {
             init : function (x, y, settings) 
             {
@@ -74,12 +74,12 @@ game.generic_flame_entity = me.Entity.extend(
                 settings.height = 57;
                 settings.explosion_hit_points = 12;
                 settings.frameCount = 12;
-                this._super(game.generic_explosion_entity, 'init', [x, y, settings]);
+                this._super(game.generic_flame_entity, 'init', [x, y, settings]);
                 this.body.setCollisionMask(me.collision.types.NO_OBJECT);
             },
         });
     
-    game.small_explode = game.generic_explosion_entity.extend(
+    game.small_explode = game.generic_flame_entity.extend(
         {
             init : function (x, y, settings) 
             {
@@ -90,7 +90,7 @@ game.generic_flame_entity = me.Entity.extend(
                 settings.height = 32;
                 settings.explosion_hit_points = 6;
                 settings.frameCount = 10;
-                this._super(game.generic_explosion_entity, 'init', [x, y, settings]);
+                this._super(game.generic_flame_entity, 'init', [x, y, settings]);
                 this.body.setCollisionMask(me.collision.types.NO_OBJECT);
             },
         });
