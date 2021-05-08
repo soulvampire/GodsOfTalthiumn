@@ -59,11 +59,16 @@ var game =
   onload: function () 
   {
     // Initialize the video.
-    if (!me.video.init(800, 600, {wrapper : "screen", renderer: me.video.WEBGL, scale : "auto", scaleMethod : "flex-width", })) 
-    {
+    if (!me.video.init(800, 600, {
+      wrapper : "screen",
+          scale : "auto",
+          scaleMethod : "flex-width",
+          //compositor: compositor,
+          renderer : me.video.WEBGL,
+          subPixel : false })) {
       alert("Your browser does not support HTML5 canvas.");
       return;
-    }
+  }
       
     // Initialize the audio.
     me.audio.init("mp3,ogg");

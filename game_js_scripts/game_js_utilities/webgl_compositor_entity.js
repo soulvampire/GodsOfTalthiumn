@@ -1,6 +1,7 @@
 /* jshint plusplus:false */
 /* jshint quotmark:false */
-compositor = (function(){
+compositor = (function()
+{
     var VERTEX_SIZE = 2;
     var COLOR_SIZE = 4;
     var TEXTURE_SIZE = 1;
