@@ -63,7 +63,6 @@ var game =
       wrapper : "screen",
       scale : "auto",
       scaleMethod : "flex-width",
-      //compositor: compositor,
       renderer : me.video.WEBGL,
       subPixel : false })) {
       alert("Your browser does not support HTML5 canvas.");
