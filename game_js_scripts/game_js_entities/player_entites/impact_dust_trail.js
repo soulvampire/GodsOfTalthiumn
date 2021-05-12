@@ -35,8 +35,8 @@ game.impact_dust_trail = me.Renderable.extend(
     displayImpactDustTrails: function(player_xPos, player_yPos)
     {
       this.playerimpactdustemitter.angle = 1.570;
-      this.playerimpactdustemitter.totalParticles = me.Math.random(3, 7)// random number between 5 and 10;
-      this.playerimpactdustemitter.maxParticles = me.Math.random(3, 7)// random number between 5 and 10
+      this.playerimpactdustemitter.totalParticles = me.Math.random(3, 7)// random number between 3 and 7
+      this.playerimpactdustemitter.maxParticles = me.Math.random(3, 7)// random number between 3 and 7
       this.playerimpactdustemitter.pos.set(Math.floor(player_xPos), Math.floor(player_yPos));
       this.playerimpactdustemitter.burstParticles();
     },
