@@ -338,7 +338,7 @@ game.player_entity = me.Entity.extend(
       /* update player state standing doing nothing */
       /**********************************************/
       else {
-        this.player_current_states = player_states.player_idle;//player idle left game state
+        this.player_current_states = player_states.player_idle;//player idle game state
         this.playerMovement();
       }
 
@@ -434,8 +434,7 @@ game.player_entity = me.Entity.extend(
         /*******************************/
         /* reset current fall distance */
         /*******************************/
-        else 
-        {
+        else {
           this.player_current_fall_distance = 0;
         }
         /**********************************/
@@ -446,8 +445,7 @@ game.player_entity = me.Entity.extend(
       /******************************/
       /* multi jump condition check */
       /******************************/
-      else if (this.body.falling && this.multipleJump < 2) 
-      {
+      else if (this.body.falling && this.multipleJump < 2) {
         // reset the multipleJump flag if falling
         this.multipleJump = 2;
       }
@@ -486,8 +484,7 @@ game.player_entity = me.Entity.extend(
     /************************************/
     /* player/platform colision handler */
     /************************************/
-    onCollision: function (response, other) 
-    {
+    onCollision: function (response, other) {
       this.player_climbable_states = player_states.player_off_climbable;
       switch (other.body.collisionType) {
         case me.collision.types.WORLD_SHAPE:
@@ -556,7 +553,7 @@ game.player_entity = me.Entity.extend(
           /* sloped ground */
           /*****************/
           if (other.type === "slope") {
-            console.log('slope if');
+            console.log("slope if");
             // Always adjust the collision response upward
             response.overlapV.y = Math.abs(response.overlap);
             response.overlapV.x = 0;
@@ -596,7 +593,7 @@ game.player_entity = me.Entity.extend(
 
         case me.collision.types.ACTION_OBJECT:
           // If the entity jumped onto a spring.
-          if (other.name === 'platform_spring') {
+          if (other.name === "platform_spring") {
             if ((response.overlapV.y > 0) && this.body.falling) {
               // Accelerate the entity.
               this.speedUp();
@@ -608,7 +605,7 @@ game.player_entity = me.Entity.extend(
               other.action();
             }
           }
-          else if (other.name === 'castle_door_lock' || other.name === 'item_chest') {
+          else if (other.name === "castle_door_lock" || other.name === "item_chest") {
             this.action.enabled = true;
             this.action.other = other;
           }
@@ -786,8 +783,6 @@ game.player_entity = me.Entity.extend(
         /* player jumping movement */
         /***************************/
         case "player_jump_up":
-          
-          
           if (this.multipleJump <= 2) {
             // easy "math" for double jump
             this.body.force.y -= this.body.maxVel.y * this.multipleJump++;
