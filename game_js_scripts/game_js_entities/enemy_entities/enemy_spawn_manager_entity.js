@@ -1,7 +1,7 @@
 /**********************/
 /* enemy game manager */
 /**********************/
-game.game_enemy_manager = me.Object.extend(
+game.enemy_spawn_manager = me.Object.extend(
 {
     init: function(x, y, settings)
     {
