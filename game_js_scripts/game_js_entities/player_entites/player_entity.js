@@ -283,9 +283,9 @@ game.player_entity = me.Entity.extend(
     /* update player position */
     /**************************/
     update: function (dt) {
-      /******************************/
-      /* player movement key states */
-      /******************************/
+      /********************************/
+      /* player controller key states */
+      /********************************/
       /*********************************/
       /* keypress player left position */
       /*********************************/
@@ -441,12 +441,13 @@ game.player_entity = me.Entity.extend(
         /* reset the multi jump flag to 1 */
         /**********************************/
         this.multipleJump = 1;
+        this.body.jumping = false;
       }
       /******************************/
       /* multi jump condition check */
       /******************************/
       else if (this.body.falling && this.multipleJump < 2) {
-        // reset the multipleJump flag if falling
+        // set the multipleJump flag if falling
         this.multipleJump = 2;
       }
       /*******************************************/
@@ -622,9 +623,9 @@ game.player_entity = me.Entity.extend(
     /* end player/platform colision handler */
     /****************************************/
 
-    /*****************************/
-    /* player direction movement */
-    /*****************************/
+    /******************************/
+    /* player controller movement */
+    /******************************/
     playerMovement: function () {
       switch (this.player_current_states) {
         /************************/
