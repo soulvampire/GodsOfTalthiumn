@@ -466,13 +466,16 @@ game.player_entity = me.Entity.extend(
         }
       }
 
-      // apply physics to the body (this moves the entity)
+      /*****************************/
+      /* apply physics to the body */
+      /*****************************/
       this.body.update(dt);
 
       // update position of the health bar, mana bar and player icon bar
       //this.updatePlayerStatBars();
-
-      // handle collisions against other shapes
+      /******************************************/
+      /* handle collisions against other shapes */
+      /******************************************/
       me.collision.check(this);
 
       // check if we moved

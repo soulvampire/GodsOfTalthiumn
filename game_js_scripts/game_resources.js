@@ -55,13 +55,13 @@ game.resources = [
         {name: "platform_3", type: "image", src: "game_data/game_images/game_map_images/game_world01/map_castle_level/platform_3.png"},
         {name: "platform_4", type: "image", src: "game_data/game_images/game_map_images/game_world01/map_castle_level/platform_4.png"},
     
-    /*********************************/
-    /* world 1, area 1(castle level) */
-    /*********************************/
+    /***************************/
+    /* world 1, (castle level) */
+    /***************************/
         /**********************/
         /* map tilesets (tmx) */
         /**********************/
-	   {name: "world01_area01", type: "tmx", src: "game_data/game_maps/game_world01/map_castle_level/world01_area01.tmx"},
+	   {name: "castle_world", type: "tmx", src: "game_data/game_maps/game_world01/map_castle_level/castle_world.tmx"},
      
         /**********************/
         /* map tilesets (tsx) */
