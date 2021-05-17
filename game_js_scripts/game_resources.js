@@ -12,7 +12,7 @@ game.resources = [
     /********************************/
     /* parallax layers images (png) */
     /********************************/ 
-        {name: "platform_background_image_03", type:"image", src: "game_data/game_images/game_map_images/game_world01/parallax_layers/platform_background_image_03.png"},
+        {name: "platform_background_image_04", type:"image", src: "game_data/game_images/game_map_images/game_world01/parallax_layers/platform_background_image_04.png"},
 
     /**********************/
     /* map graphics (png) */

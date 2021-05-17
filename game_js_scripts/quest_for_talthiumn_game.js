@@ -141,7 +141,7 @@ var game =
     /*****************************/
     /* game enemy manager object */
     /*****************************/
-      me.pool.register("game_enemy_manager", game.game_enemy_manager, false);
+      me.pool.register("enemy_spawn_manager", game.enemy_spawn_manager, false);
 
     /************************************/
     /* load the texture atlas file this */

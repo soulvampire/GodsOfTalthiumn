@@ -2,7 +2,7 @@
 <map version="1.5" tiledversion="1.6.0" orientation="orthogonal" renderorder="right-down" width="128" height="66" tilewidth="32" tileheight="32" infinite="0" nextlayerid="19" nextobjectid="599">
  <tileset firstgid="1" source="world01_area01_castle.tsx"/>
  <imagelayer id="18" name="parallax_image_layer" locked="1">
-  <image source="../../../game_images/game_map_images/game_world01/parallax_layers/platform_background_image_03.png" width="4096" height="2048"/>
+  <image source="../../../game_images/game_map_images/game_world01/parallax_layers/platform_background_image_04.png" width="4096" height="2048"/>
   <properties>
    <property name="ratio" type="float" value="0"/>
   </properties>
