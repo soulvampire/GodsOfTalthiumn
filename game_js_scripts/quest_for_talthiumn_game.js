@@ -59,11 +59,11 @@ var game =
   onload: function () 
   {
     // Initialize the video.
-    if (!me.video.init(800, 600, {
+    if (!me.video.init(1024, 768, {
       wrapper : "screen",
       scale : "auto",
       scaleMethod : "flex-width",
-      renderer : me.video.WEBGL,
+      rrenderer : me.video.AUTO,
       subPixel : false })) {
       alert("Your browser does not support HTML5 canvas.");
       return;
@@ -143,10 +143,10 @@ var game =
     /*****************************/
       me.pool.register("enemy_spawn_manager", game.enemy_spawn_manager, false);
 
-    /************************************/
-    /* load the texture atlas file this */
-    /************************************/
-      game.texture = new me.video.renderer.Texture(
+    /*******************************/
+    /* load the texture atlas file */
+    /*******************************/
+      game.player_sprites = new me.video.renderer.Texture(
         me.loader.getJSON("character_movement_right"),
         me.loader.getImage("character_movement_right")
       );
@@ -157,9 +157,9 @@ var game =
       /****************************/
       /* player keyboard controls */
       /****************************/
-        /**********************************/
-        /* player move walk left or right */
-        /**********************************/
+        /***************************************/
+        /* player move walk left or right keys */
+        /***************************************/
           me.input.bindKey(me.input.KEY.LEFT, "walk_left");
           me.input.bindKey(me.input.KEY.RIGHT, "walk_right");
 
@@ -214,7 +214,7 @@ var game =
       me.input.bindGamepad(0, {type:"axes", code: me.input.GAMEPAD.AXES.LY, threshold: -0.5}, me.input.KEY.UP);
 
     me.game.onLevelLoaded = this.collectObjects.bind(this);
-
+    
     // Start the game.
     me.state.change(me.state.PLAY);
   },
