@@ -10,9 +10,8 @@ game.PlayScreen = me.Stage.extend({
         // reset the score
         game.data.score = 0;
         
-        // add our HUD to the game world
-        this.HUD = new game.HUD.Container();
-        me.game.world.addChild(this.HUD);
+        // add our player info bar to the game world
+        me.game.world.addChild(new game.player_info_bar_display(), 100);
         // display the current pointer coordinates on top of the pointer arrow
         
     },
@@ -22,6 +21,6 @@ game.PlayScreen = me.Stage.extend({
     onDestroyEvent: function() 
     {
         // remove the HUD from the game world
-        me.game.world.removeChild(this.HUD);
+        me.game.world.removeChild(this.player_info_bar);
     }
 });

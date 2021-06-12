@@ -92,7 +92,6 @@ var game =
       me.pool.register("main_player", game.player_entity, false);
       me.pool.register("player_health_bar", game.health_bar_entity, false);
       me.pool.register("player_mana_bar", game.mana_bar_entity, false);
-      me.pool.register("player_level_icon", game.player_level_icon_entity, false);
 
     /*********************************/
     /* player entity effects objects */

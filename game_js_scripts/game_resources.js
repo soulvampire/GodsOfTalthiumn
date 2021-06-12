@@ -1,14 +1,18 @@
 game.resources = [
-    /*********************/
-    /* character sprites */
-    /*********************/
+    /******************/
+    /* player sprites */
+    /******************/
+        {name: "character_movement_right", type: "image", src: "game_data/game_sprites/player_sprites/character_movement_right.png"},
+        {name: "character_movement_right", type: "json", src: "game_data/game_sprites/player_sprites/character_movement_right.json"},
+        {name: "dust_particle", type: "image", src: "game_data/game_sprites/player_sprites/player_dust_trail.png"},
+        {name: "blood_particle", type: "image", src: "game_data/game_sprites/player_sprites/blood_trail.png"},
+        {name: "hp_bar_frame", type: "image", src: "game_data/game_sprites/player_sprites/hp_bar.png"},
+
+    /******************/
+    /* enemy sprites */
+    /******************/
         {name: "enemy_walk_right", type: "image", src: "game_data/game_sprites/enemy_sprites/enemy_walk_right.png"},
-        {name: "character_movement_right", type: "image", src: "game_data/game_sprites/character_sprites/character_movement_right.png"},
-        {name: "character_movement_right", type: "json", src: "game_data/game_sprites/character_sprites/character_movement_right.json"},
-        {name: "dust_particle", type: "image", src: "game_data/game_sprites/character_sprites/player_dust_trail.png"},
-        {name: "blood_particle", type: "image", src: "game_data/game_sprites/character_sprites/blood_trail.png"},
-        {name: "hp_bar_frame", type: "image", src: "game_data/game_sprites/character_sprites/hp_bar.png"},
-    
+
     /********************************/
     /* parallax layers images (png) */
     /********************************/ 
@@ -54,6 +58,11 @@ game.resources = [
         {name: "platform_2", type: "image", src: "game_data/game_images/game_map_images/game_world01/map_castle_level/platform_2.png"},
         {name: "platform_3", type: "image", src: "game_data/game_images/game_map_images/game_world01/map_castle_level/platform_3.png"},
         {name: "platform_4", type: "image", src: "game_data/game_images/game_map_images/game_world01/map_castle_level/platform_4.png"},
+
+    /*************************/
+    /* player info bar image */
+    /*************************/
+        {name: "player_info_bar", type: "image", src: "game_data/game_hud/player_hud/player_info.png"},
     
     /***************************/
     /* world 1, (castle level) */
