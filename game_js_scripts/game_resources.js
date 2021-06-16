@@ -62,7 +62,9 @@ game.resources = [
     /*************************/
     /* player info bar image */
     /*************************/
-        {name: "player_info_bar", type: "image", src: "game_data/game_hud/player_hud/player_info.png"},
+        {name: "player_plaque", type: "image", src: "game_data/game_hud/player_hud/player_plaque.png"},
+        {name: "player_mana_health_bar", type: "image", src: "game_data/game_hud/player_hud/player_mana_health_bar.png"},
+        {name: "main_game_interface", type: "image", src: "game_data/game_hud/game_interface/main_interface.png"},
     
     /***************************/
     /* world 1, (castle level) */

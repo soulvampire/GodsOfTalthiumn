@@ -11,7 +11,9 @@ game.PlayScreen = me.Stage.extend({
         game.data.score = 0;
         
         // add our player info bar to the game world
-        me.game.world.addChild(new game.player_info_bar_display(), 100);
+        me.game.world.addChild(new game.player_plaque_display(), 100);
+        me.game.world.addChild(new game.player_mana_health_display(), 100);
+        me.game.world.addChild(new game.main_game_interface_display(), 100);
         // display the current pointer coordinates on top of the pointer arrow
         
     },
