@@ -215,8 +215,8 @@ game.player_entity = me.Entity.extend(
       /***************************/
       /* max player health lvl 1 */
       /***************************/
-      this.max_health = 500;
-      this.current_health = 500;
+      this.max_health = game.data.player_max_health;
+      this.current_health = game.data.player_current_health;
 
       /************************/
       /* player fall distance */
@@ -228,7 +228,7 @@ game.player_entity = me.Entity.extend(
       /* max player mana lvl 1 */
       /*************************/
       this.max_mana = 100;
-      this.current_mana = 50;
+      this.current_mana = 100;
 
       /**************************/
       /* player multi jump flag */
@@ -267,16 +267,16 @@ game.player_entity = me.Entity.extend(
       /************************************/
       /* player health bar initial values */
       /************************************/
-      // this.playerhealthBar = me.pool.pull("player_health_bar", this.current_health, this.max_health, this.pos.x, this.pos.y);
-      // me.game.world.addChild(this.playerhealthBar, 100);
-      // this.playerhealthBar.updateOnce = true;
+      this.player_head_health_bar = me.pool.pull("player_head_health_bar", this.current_health, this.max_health, this.pos.x - 8, this.pos.y - 10, 35, 4);
+      me.game.world.addChild( this.player_head_health_bar, 100);
+      this.player_head_health_bar.updateOnce = true;
 
       /**********************************/
       /* player mana bar initial values */
       /**********************************/
-      // this.playermanaBar = me.pool.pull("player_mana_bar", this.current_mana, this.max_mana, this.pos.x, this.pos.y);
-      // me.game.world.addChild(this.playermanaBar, 100);
-      // this.playermanaBar.updateOnce = true;
+      this.player_head_mana_bar = me.pool.pull("player_head_mana_bar", this.current_mana, this.max_mana, this.pos.x - 8, this.pos.y - 5, 35, 4);
+      me.game.world.addChild(this.player_head_mana_bar, 100);
+      this.player_head_mana_bar.updateOnce = true;
     },
 
     /**************************/
@@ -472,7 +472,7 @@ game.player_entity = me.Entity.extend(
       this.body.update(dt);
 
       // update position of the health bar, mana bar and player icon bar
-      //this.updatePlayerStatBars();
+      this.updatePlayerStatBars();
       /******************************************/
       /* handle collisions against other shapes */
       /******************************************/
@@ -827,14 +827,14 @@ game.player_entity = me.Entity.extend(
     /* update player stat bar */
     /**************************/
     updatePlayerStatBars: function () {
-      /**************************/
-      /* update player mana bar */
-      /**************************/
-      this.playermanaBar.drawManaBarPosition(Math.floor(this.pos.x), Math.floor(this.pos.y));
       /****************************/
       /* update player health bar */
       /****************************/
-      this.playerhealthBar.drawHealthBarPosition(Math.floor(this.pos.x), Math.floor(this.pos.y));
+      this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x - 8), Math.floor(this.pos.y - 10));
+      /**************************/
+      /* update player mana bar */
+      /**************************/
+      this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x - 8), Math.floor(this.pos.y - 5));
     },
 
     displayplayerimpactdustTrails: function () {

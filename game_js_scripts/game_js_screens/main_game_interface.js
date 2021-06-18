@@ -2,7 +2,7 @@
  * a player info bar didplay renderable and child items
  */
 
- game.main_game_interface_display = game.main_game_interface_display || {};
+ game = game || {};
 
  game.main_game_interface_display = me.Renderable.extend({
  

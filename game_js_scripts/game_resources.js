@@ -32,7 +32,6 @@ game.resources = [
     /* platform spike */
     /******************/  
         {name: "platform_spike", type:"image", src: "game_data/game_images/game_map_images/game_world01/game_hazards/rotating_standing_spike.png"},
-        //{name: "platform_flame_torch", type:"image", src: "game_data/game_images/game_map_images/game_world01/game_hazards/crystal_light_green.png"},
         {name: "explosive_trap", type:"image", src: "game_data/game_images/game_map_images/game_world01/game_hazards/explosive_trap.png"},
         {name: "default_trap_explosion", type:"image", src: "game_data/game_images/game_map_images/game_world01/game_hazards/trap_explosion.png"},
         {name: "large_trap_explosion", type:"image", src: "game_data/game_images/game_map_images/game_world01/game_hazards/large_trap_explosion.png"},

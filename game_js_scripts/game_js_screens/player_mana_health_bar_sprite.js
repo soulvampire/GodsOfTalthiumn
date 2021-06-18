@@ -2,9 +2,9 @@
  * a player info bar didplay renderable and child items
  */
 
-game.player_mana_health_display = game.player_mana_health_display || {};
+game = game || {};
 
-game.player_mana_health_display = me.Renderable.extend({
+game.player_hud_mana_health_sprite = me.Renderable.extend({
 
 	init: function () {
 		this._super(me.Renderable, "init",

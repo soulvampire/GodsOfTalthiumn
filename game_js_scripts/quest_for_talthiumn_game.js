@@ -10,7 +10,15 @@ var game =
   {
     obtained_keys: [],
     // score
-    score : 0
+    score : 0,
+
+    // player health bar
+    player_current_health : 100,
+    player_max_health : 100,
+
+    //player mana bar
+    player_current_mana: 100,
+    player_max_mana : 100
   },
 
   /****************/
@@ -84,14 +92,14 @@ var game =
   loaded: function () 
   {
     me.state.set(me.state.MENU, new game.TitleScreen());
-    me.state.set(me.state.PLAY, new game.PlayScreen());
+    me.state.set(me.state.PLAY, new game.play_screen());
 
     /*************************/
     /* player entity objects */
     /*************************/ 
       me.pool.register("main_player", game.player_entity, false);
-      me.pool.register("player_health_bar", game.health_bar_entity, false);
-      me.pool.register("player_mana_bar", game.mana_bar_entity, false);
+      me.pool.register("player_head_health_bar", game.generic_health_bar_entity, false);
+      me.pool.register("player_head_mana_bar", game.generic_mana_bar_entity, false);
 
     /*********************************/
     /* player entity effects objects */
