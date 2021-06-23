@@ -18,6 +18,8 @@ const player_states =
   player_climb_down: "player_climb_down"
 };
 
+game = game || {};
+
 /*****************/
 /* player entity */
 /*****************/
@@ -227,8 +229,8 @@ game.player_entity = me.Entity.extend(
       /*************************/
       /* max player mana lvl 1 */
       /*************************/
-      this.max_mana = 100;
-      this.current_mana = 100;
+      this.max_mana = game.data.player_max_mana;
+      this.current_mana = game.data.player_current_mana;
 
       /**************************/
       /* player multi jump flag */
@@ -267,16 +269,28 @@ game.player_entity = me.Entity.extend(
       /************************************/
       /* player health bar initial values */
       /************************************/
-      this.player_head_health_bar = me.pool.pull("player_head_health_bar", this.current_health, this.max_health, this.pos.x - 8, this.pos.y - 10, 35, 4);
+      this.player_head_health_bar = me.pool.pull("player_head_health_bar", game.data.player_current_health, game.data.player_max_health, this.pos.x - 8, this.pos.y - 12, 35, 4);
       me.game.world.addChild( this.player_head_health_bar, 100);
       this.player_head_health_bar.updateOnce = true;
+
+      this.player_health_bar = me.pool.pull("player_head_health_bar", game.data.player_current_health, game.data.player_max_mana, 48, 14, 95,8);
+      me.game.world.addChild(this.player_health_bar, 100);
+      this.player_health_bar.isPersistent = true;
+      this.player_health_bar.floating = true;
+      this.player_health_bar.updateOnce = true;
 
       /**********************************/
       /* player mana bar initial values */
       /**********************************/
-      this.player_head_mana_bar = me.pool.pull("player_head_mana_bar", this.current_mana, this.max_mana, this.pos.x - 8, this.pos.y - 5, 35, 4);
+      this.player_head_mana_bar = me.pool.pull("player_head_mana_bar", game.data.player_current_mana, game.data.player_max_mana, this.pos.x - 8, this.pos.y - 7, 35, 4);
       me.game.world.addChild(this.player_head_mana_bar, 100);
       this.player_head_mana_bar.updateOnce = true;
+
+      this.player_mana_bar = me.pool.pull("player_head_mana_bar",game.data.player_current_mana, game.data.player_max_mana, 48, 22, 95, 8);
+      me.game.world.addChild( this.player_mana_bar , 100);
+      this.player_mana_bar.isPersistent = true;
+      this.player_mana_bar.floating = true;
+      this.player_mana_bar.updateOnce = true;
     },
 
     /**************************/
@@ -578,7 +592,7 @@ game.player_entity = me.Entity.extend(
             //game world fixed danger
             //this.body.vel.y -= this.body.maxVel.y * 0.2 * me.timer.tick;
             if (other.name === "stationary_spike") {
-              //this.hurt(other.spike_hit_points);
+              this.hurt(other.spike_hit_points);
             }
           }
           else {
@@ -809,8 +823,11 @@ game.player_entity = me.Entity.extend(
       if (!this.renderable.isFlickering()) {
         this.renderable.flicker(250);
         this.floating_text = me.pool.pull("generic_floating_text", hit_points, Math.floor(this.pos.x), Math.floor(this.pos.y));
-        this.playerhealthBar.setPlayerHealthBar(this.current_health -= hit_points);
-        this.playerhealthBar.updateOnce = true;
+        this.player_head_health_bar.setPlayerHealthBar(game.data.player_current_health -= hit_points);
+        this.player_head_health_bar.updateOnce = true;
+
+        this.player_health_bar.setPlayerHealthBar(game.data.player_current_health);
+        this.player_health_bar.updateOnce = true;
         // hurt blood splatter
         this.bloodtrails = me.pool.pull("blood_trails", Math.floor(this.pos.x), Math.floor(this.pos.y));
         this.bloodPosition = me.game.viewport.worldToLocal(Math.floor(this.pos.x), Math.floor(this.pos.y));
@@ -830,11 +847,11 @@ game.player_entity = me.Entity.extend(
       /****************************/
       /* update player health bar */
       /****************************/
-      this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x - 8), Math.floor(this.pos.y - 10));
+      this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x - 8), Math.floor(this.pos.y - 12));
       /**************************/
       /* update player mana bar */
       /**************************/
-      this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x - 8), Math.floor(this.pos.y - 5));
+      this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x - 8), Math.floor(this.pos.y - 7));
     },
 
     displayplayerimpactdustTrails: function () {

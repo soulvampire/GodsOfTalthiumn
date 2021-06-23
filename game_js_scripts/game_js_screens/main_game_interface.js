@@ -1,7 +1,3 @@
-/**
- * a player info bar didplay renderable and child items
- */
-
  game = game || {};
 
  game.main_game_interface_display = me.Renderable.extend({
@@ -18,15 +14,15 @@
      this.floating = true;
  
      // make sure our object is always draw first
-     this.z = 100;
+     this.z = 100;   
  
-     this.main_game_interface_sprite= new me.Sprite(290, 415, {
+     this.main_game_interface_sprite = new me.Sprite(290, 415, {
        image: "main_game_interface",
        framewidth: 618,
        frameheight: 181,
        anchorPoint: new me.Vector2d(0.5, 0.5)
      });
- 
+     
      this.main_game_interface_sprite.floating = true;
    },
  

@@ -18,7 +18,7 @@ var game =
 
     //player mana bar
     player_current_mana: 100,
-    player_max_mana : 100
+    player_max_mana : 100,
   },
 
   /****************/
@@ -67,15 +67,11 @@ var game =
   onload: function () 
   {
     // Initialize the video.
-    if (!me.video.init(800, 600, {
-      wrapper : "screen",
-      scale : "auto",
-      scaleMethod : "flex-width",
-      rrenderer : me.video.AUTO,
-      subPixel : false })) {
+    if (!me.video.init(800, 600, {wrapper : "screen", scale : "auto", scaleMethod : "flex-width", renderer : me.video.AUTO, subPixel : false })) 
+    {
       alert("Your browser does not support HTML5 canvas.");
       return;
-  }
+    }
       
     // Initialize the audio.
     me.audio.init("mp3,ogg");
@@ -91,7 +87,7 @@ var game =
   // 
   loaded: function () 
   {
-    me.state.set(me.state.MENU, new game.TitleScreen());
+    me.state.set(me.state.MENU, new game.title_screen());
     me.state.set(me.state.PLAY, new game.play_screen());
 
     /*************************/
@@ -169,6 +165,9 @@ var game =
         /***************************************/
           me.input.bindKey(me.input.KEY.LEFT, "walk_left");
           me.input.bindKey(me.input.KEY.RIGHT, "walk_right");
+
+          me.input.bindKey(me.input.KEY.S, "walk_left");
+          me.input.bindKey(me.input.KEY.D, "walk_right");
 
         /************************************/
         /* player platform pass through key */

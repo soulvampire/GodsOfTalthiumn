@@ -1,7 +1,3 @@
-/**
- * a player info bar didplay renderable and child items
- */
-
 game = game || {};
 
 game.player_plaque_display = me.Renderable.extend({

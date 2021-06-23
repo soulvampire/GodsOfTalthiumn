@@ -1,4 +1,6 @@
-game.TitleScreen = me.Stage.extend({
+game = game || {};
+
+game.title_screen = me.Stage.extend({
     /**
      *  action to perform on state change
      */
