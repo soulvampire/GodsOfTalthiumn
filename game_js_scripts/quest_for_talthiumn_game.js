@@ -166,7 +166,7 @@ var game =
           me.input.bindKey(me.input.KEY.LEFT, "walk_left");
           me.input.bindKey(me.input.KEY.RIGHT, "walk_right");
 
-          me.input.bindKey(me.input.KEY.S, "walk_left");
+          me.input.bindKey(me.input.KEY.A, "walk_left");
           me.input.bindKey(me.input.KEY.D, "walk_right");
 
         /************************************/

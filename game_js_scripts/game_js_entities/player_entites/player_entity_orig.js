@@ -769,7 +769,7 @@ game.player_entity = me.Entity.extend(
         /* crawl right player movement */
         /*******************************/
         case "player_crawl_right":
-          this.body.setMaxVelocity(0.7, 8.0);
+          this.body.setMaxVelocity(1, 8.0);
           this.body.force.x += this.body.maxVel.x * me.timer.tick;
           this.body.force.y = 0;
           this.renderable.flipX(false)
@@ -785,7 +785,7 @@ game.player_entity = me.Entity.extend(
         /* crawl left player movement */
         /******************************/
         case "player_crawl_left":
-          this.body.setMaxVelocity(0.7, 8.0);
+          this.body.setMaxVelocity(1, 8.0);
           this.body.force.x -= this.body.maxVel.x * me.timer.tick;
           this.body.force.y = 0;
           this.renderable.flipX(true)

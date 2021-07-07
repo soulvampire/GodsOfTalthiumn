@@ -7,7 +7,7 @@ game.play_screen = me.Stage.extend({
     onResetEvent: function() 
     {	
         // load a level
-        me.levelDirector.loadLevel("castle_world");    
+        me.levelDirector.loadLevel("castle_level");    
         me.game.world.addChild(new game.player_plaque_display(), 100);
         me.game.world.addChild(new game.player_hud_mana_health_sprite(), 100);
         me.game.world.addChild(new game.main_game_interface_display(), 100);

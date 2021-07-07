@@ -21,7 +21,7 @@ game.resources = [
     /**********************/
     /* map graphics (png) */
     /**********************/
-        {name: "world01_area01_images", type:"image", src: "game_data/game_images/game_map_images/game_world01/map_castle_level/world01_area01_images.png"},
+        {name: "castle_level_image", type:"image", src: "game_data/game_images/game_map_images/game_world01/map_castle_level/castle_level_image.png"},
 
     /***********************/
     /* dialog window (png) */
@@ -71,7 +71,7 @@ game.resources = [
         /**********************/
         /* map tilesets (tmx) */
         /**********************/
-	   {name: "castle_world", type: "tmx", src: "game_data/game_maps/game_world01/map_castle_level/castle_world.tmx"},
+	   {name: "castle_level", type: "tmx", src: "game_data/game_maps/game_world01/map_castle_level/castle_level.tmx"},
      
         /**********************/
         /* map tilesets (tsx) */
