@@ -163,34 +163,34 @@ var game =
         /***************************************/
         /* player move walk left or right keys */
         /***************************************/
-          me.input.bindKey(me.input.KEY.LEFT, "walk_left");
-          me.input.bindKey(me.input.KEY.RIGHT, "walk_right");
+          me.input.bindKey(me.input.KEY.LEFT, "player_left");
+          me.input.bindKey(me.input.KEY.RIGHT, "player_right");
 
-          me.input.bindKey(me.input.KEY.A, "walk_left");
-          me.input.bindKey(me.input.KEY.D, "walk_right");
+          me.input.bindKey(me.input.KEY.A, "player_left");
+          me.input.bindKey(me.input.KEY.D, "player_right");
 
         /************************************/
         /* player platform pass through key */
         /************************************/  
-          me.input.bindKey(me.input.KEY.DOWN, "fall_down");
+          me.input.bindKey(me.input.KEY.DOWN, "player_down");
 
         /********************/
         /* player jump keys */
         /********************/
-          me.input.bindKey(me.input.KEY.UP, "jump", true);
-          me.input.bindKey(me.input.KEY.SPACE, "jump",true);
+          me.input.bindKey(me.input.KEY.UP, "player_jump", true);
+          me.input.bindKey(me.input.KEY.SPACE, "player_jump",true);
 
         /**********************************/
         /* player crawl key left or right */
         /**********************************/
-          me.input.bindKey(me.input.KEY.V, "crawl_right");
-          me.input.bindKey(me.input.KEY.C, "crawl_left");
+          me.input.bindKey(me.input.KEY.V, "player_crawl_right");
+          me.input.bindKey(me.input.KEY.C, "player_crawl_left");
 
         /**********************************/
         /* player climb ladder up or down */
         /**********************************/ 
-          me.input.bindKey(me.input.KEY.U, "climb_up");
-          me.input.bindKey(me.input.KEY.J, "climb_down");
+          me.input.unbindKey(me.input.KEY.U, "player_climb_up");
+          me.input.bindKey(me.input.KEY.J, "player_climb_down");
 
         /***************************************************/
         /* player action key used interactive game objects */

@@ -303,7 +303,7 @@ game.player_entity = me.Entity.extend(
       /*********************************/
       /* keypress player left position */
       /*********************************/
-      if (me.input.isKeyPressed("walk_left")) {
+      if (me.input.isKeyPressed("player_left")) {
         this.player_current_states = player_states.player_facing_left;//player left game state
         this.playerMovement();
       }
@@ -311,7 +311,7 @@ game.player_entity = me.Entity.extend(
       /**********************************/
       /* keypress player right position */
       /**********************************/
-      else if (me.input.isKeyPressed("walk_right")) {
+      else if (me.input.isKeyPressed("player_right")) {
         this.player_current_states = player_states.player_facing_right;//player right game state
         this.playerMovement();
       }
@@ -319,7 +319,7 @@ game.player_entity = me.Entity.extend(
       /***********************************/
       /* keypress player climb up ladder */
       /***********************************/
-      else if (me.input.isKeyPressed('climb_up')) {
+      else if (me.input.isKeyPressed('player_climb_up')) {
         this.player_current_states = player_states.player_climb_up//player climb up game state
         this.playerMovement();
       }
@@ -327,7 +327,7 @@ game.player_entity = me.Entity.extend(
       /*************************************/
       /* keypress player climb down ladder */
       /*************************************/
-      else if (me.input.isKeyPressed("climb_down")) {
+      else if (me.input.isKeyPressed("player_climb_down")) {
         this.player_current_states = player_states.player_climb_down;//player climb down game state
         this.playerMovement();
       }
@@ -335,7 +335,7 @@ game.player_entity = me.Entity.extend(
       /**********************************/
       /* keypress right player crawling */
       /**********************************/
-      else if (me.input.isKeyPressed("crawl_right")) {
+      else if (me.input.isKeyPressed("player_crawl_right")) {
         this.player_current_states = player_states.player_crawl_right;//player crawl right game state
         this.playerMovement();
       }
@@ -343,7 +343,7 @@ game.player_entity = me.Entity.extend(
       /*********************************/
       /* keypress left player crawling */
       /*********************************/
-      else if (me.input.isKeyPressed("crawl_left")) {
+      else if (me.input.isKeyPressed("player_crawl_left")) {
         this.player_current_states = player_states.player_crawl_left;//player crawl left game state
         this.playerMovement();
       }
@@ -359,7 +359,7 @@ game.player_entity = me.Entity.extend(
       /*******************************************/
       /* keypress player jumping and double jump */
       /*******************************************/
-      if (me.input.isKeyPressed("jump")) {
+      if (me.input.isKeyPressed("player_jump")) {
         this.player_current_states = player_states.player_jump_up;//player jump left game state
         /*************************/
         /* set jump flag to true */
@@ -536,7 +536,7 @@ game.player_entity = me.Entity.extend(
             if ((Math.floor(this.pos.y) > other.ladder_top_position) && (Math.floor(this.pos.y) <= other.ladder_bottom_position)) {
               this.player_climbable_states = player_states.player_in_climbable;
             }
-            else {
+            else if ((Math.floor(this.pos.y) < other.ladder_top_position) && (Math.floor(this.pos.x) >= other.ladder_left_position)) {
               this.player_climbable_states = player_states.player_on_climbable;
             }
           }
@@ -548,7 +548,7 @@ game.player_entity = me.Entity.extend(
             if ((Math.floor(this.pos.y) > other.chain_top_position) && (Math.floor(this.pos.y) <= other.chain_bottom_position)) {
               this.player_climbable_states = player_states.player_in_climbable;
             }
-            else {
+            else if ((Math.floor(this.pos.y) < other.chain_top_position) && (Math.floor(this.pos.x) >= other.chain_left_position)) {
               this.player_climbable_states = player_states.player_on_climbable;
             }
           }
@@ -557,7 +557,7 @@ game.player_entity = me.Entity.extend(
           /* static platform */
           /*******************/
           if (other.type === "platform_pass_through") {
-            if (this.body.falling && !me.input.isKeyPressed("fall_down") && (response.overlapV.y > 0) && (~~this.body.vel.y >= ~~response.overlapV.y)) {
+            if (this.body.falling && !me.input.isKeyPressed("player_down") && (response.overlapV.y > 0) && (~~this.body.vel.y >= ~~response.overlapV.y)) {
               // Disable collision on the x axis
               response.overlapV.x = 0;
               // Repond to the platform (pass through)
@@ -707,7 +707,6 @@ game.player_entity = me.Entity.extend(
         case "player_climb_up":
           if (this.player_climbable_states === "player_on_climbable") {
             this.body.setMaxVelocity(0, 0);
-            this.anchorPoint.set(0.5, 0.5);
             this.body.force.x = 0;
             this.body.force.y = 0;
             //change to the climbing up animation
@@ -715,12 +714,12 @@ game.player_entity = me.Entity.extend(
               this.body.removeShape(this.body.getShape(0));
               this.body.addShape(new me.Rect(-3, -28, 28, 57));
               this.anchorPoint.set(0.5, 0.5);
-              this.change_animation("climb_over_up", (function () { this.pos.y = this.pos.y - 62; me.input.unbindKey(me.input.KEY.U, "climb_up"); }).bind(this));
+              this.change_animation("climb_over_up", (function () { this.pos.y = this.pos.y - 62; me.input.unbindKey(me.input.KEY.U, "player_climb_up"); }).bind(this));
             }
           }
 
           if (this.player_climbable_states === "player_in_climbable") {
-            this.body.setMaxVelocity(1, 0.85);
+            this.body.setMaxVelocity(1, 0.70);
             this.body.force.x = 0;
             this.body.force.y -= this.body.maxVel.y * me.timer.tick;
             // change to the climbing up animation
@@ -739,7 +738,6 @@ game.player_entity = me.Entity.extend(
         case "player_climb_down":
           if (this.player_climbable_states === "player_on_climbable") {
             this.body.setMaxVelocity(0, 0);
-            this.anchorPoint.set(0.5, 0.5);
             this.body.force.x = 0;
             this.body.force.y += this.body.maxVel.y * me.timer.tick;
             //change to the climbing up animation
@@ -747,12 +745,12 @@ game.player_entity = me.Entity.extend(
               this.body.removeShape(this.body.getShape(0));
               this.body.addShape(new me.Rect(-3, +29, 28, 57));
               this.anchorPoint.set(0.5, 0.5);
-              this.change_animation("climb_over_down", (function () { this.pos.y = this.pos.y + 64; window.setTimeout(() => { me.input.bindKey(me.input.KEY.U, "climb_up"); }, 4); }).bind(this));
+              this.change_animation("climb_over_down", (function () { this.pos.y = this.pos.y + 64; window.setTimeout(() => { me.input.bindKey(me.input.KEY.U, "player_climb_up"); }, 4); }).bind(this));
             }
           }
           
           if (this.player_climbable_states === "player_in_climbable") {
-            this.body.setMaxVelocity(1, 0.85);
+            this.body.setMaxVelocity(1, 0.70);
             this.body.force.x = 0;
             this.body.force.y += this.body.maxVel.y * me.timer.tick;
             // change to the climbing up animation
