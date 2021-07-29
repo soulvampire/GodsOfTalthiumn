@@ -18,12 +18,11 @@
      
      var screen_width = me.game.viewport.width / 2;
      var screen_height = me.game.viewport.height;
-     console.log("ascreen width " + screen_width);
  
-     this.main_game_interface_sprite = new me.Sprite(screen_width - 309, screen_height - 191, {
+     this.main_game_interface_sprite = new me.Sprite(screen_width - 309, screen_height - 119, {
        image: "main_game_interface",
        framewidth: 616,
-       frameheight: 180,
+       frameheight: 109,
        anchorPoint: new me.Vector2d(0.5, 0.5)
      });
      

@@ -1,3 +1,5 @@
+game = game || {};
+
 game.impact_dust_trail = me.Renderable.extend(
   { 
     init: function(playerPosX, playerPosY) 

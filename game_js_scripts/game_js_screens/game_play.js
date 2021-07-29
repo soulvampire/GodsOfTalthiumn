@@ -11,6 +11,7 @@ game.play_screen = me.Stage.extend({
         me.game.world.addChild(new game.player_plaque_display(), 100);
         me.game.world.addChild(new game.player_hud_mana_health_sprite(), 100);
         me.game.world.addChild(new game.main_game_interface_display(), 100);
+        me.game.world.addChild(new game.map_interface_display(), 100);
         // display the current pointer coordinates on top of the pointer arrow
     },
     /**

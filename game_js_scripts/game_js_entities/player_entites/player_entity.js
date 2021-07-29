@@ -296,80 +296,16 @@ game.player_entity = me.Entity.extend(
     /**************************/
     /* update player position */
     /**************************/
-    update: function (dt) {
-      /********************************/
-      /* player controller key states */
-      /********************************/
-      /*********************************/
-      /* keypress player left position */
-      /*********************************/
-      if (me.input.isKeyPressed("player_left")) {
-        this.player_current_states = player_states.player_facing_left;//player left game state
-        this.playerMovement();
-      }
+    update: function (delta_time) {
+      /******************************/
+      /* player keyboard keys check */
+      /******************************/
+      this.playerKeyboardCheck();
 
-      /**********************************/
-      /* keypress player right position */
-      /**********************************/
-      else if (me.input.isKeyPressed("player_right")) {
-        this.player_current_states = player_states.player_facing_right;//player right game state
-        this.playerMovement();
-      }
-
-      /***********************************/
-      /* keypress player climb up ladder */
-      /***********************************/
-      else if (me.input.isKeyPressed('player_climb_up')) {
-        this.player_current_states = player_states.player_climb_up//player climb up game state
-        this.playerMovement();
-      }
-
-      /*************************************/
-      /* keypress player climb down ladder */
-      /*************************************/
-      else if (me.input.isKeyPressed("player_climb_down")) {
-        this.player_current_states = player_states.player_climb_down;//player climb down game state
-        this.playerMovement();
-      }
-
-      /**********************************/
-      /* keypress right player crawling */
-      /**********************************/
-      else if (me.input.isKeyPressed("player_crawl_right")) {
-        this.player_current_states = player_states.player_crawl_right;//player crawl right game state
-        this.playerMovement();
-      }
-
-      /*********************************/
-      /* keypress left player crawling */
-      /*********************************/
-      else if (me.input.isKeyPressed("player_crawl_left")) {
-        this.player_current_states = player_states.player_crawl_left;//player crawl left game state
-        this.playerMovement();
-      }
-
-      /**********************************************/
-      /* update player state standing doing nothing */
-      /**********************************************/
-      else {
-        this.player_current_states = player_states.player_idle;//player idle game state
-        this.playerMovement();
-      }
-
-      /*******************************************/
-      /* keypress player jumping and double jump */
-      /*******************************************/
-      if (me.input.isKeyPressed("player_jump")) {
-        this.player_current_states = player_states.player_jump_up;//player jump left game state
-        /*************************/
-        /* set jump flag to true */
-        /*************************/
-        this.body.jumping = true;
-        this.playerMovement();
-      }
-      /**********************************/
-      /* end player movement key states */
-      /**********************************/
+      /*************************/
+      /* player movement check */
+      /*************************/
+      this.playerMovement();
 
       /*************************/
       /* use the action button */
@@ -479,21 +415,28 @@ game.player_entity = me.Entity.extend(
           this.playerimpactdusttrails.displayImpactDustTrails(Math.floor(this.playerPosition.x), Math.floor(this.playerPosition.y) + 53);
         }
       }
-
+      
       /*****************************/
       /* apply physics to the body */
       /*****************************/
-      this.body.update(dt);
+      this.body.update(delta_time);
 
-      // update position of the health bar, mana bar and player icon bar
-      this.updatePlayerStatBars();
+      /**************************************/
+      /* update position of the health bar  */
+      /* update position of mana bar        */
+      /* update position of player icon bar */
+      /**************************************/
+      //this.updatePlayerStatBars();
+
       /******************************************/
       /* handle collisions against other shapes */
       /******************************************/
       me.collision.check(this);
 
-      // check if we moved
-      return (this._super(me.Entity, 'update', [dt]) || this.body.vel.x !== 0 || this.body.vel.y !== 0 || (this.renderable && this.renderable.isFlickering()))
+      /***********************/
+      /* entity moved update */
+      /***********************/
+      return (this._super(me.Entity, 'update', [delta_time]) || this.body.vel.x !== 0 || this.body.vel.y !== 0)
     },
     /******************************/
     /* end update player position */
@@ -503,7 +446,6 @@ game.player_entity = me.Entity.extend(
     /* player/platform colision handler */
     /************************************/
     onCollision: function (response, other) {
-      this.player_climbable_states = player_states.player_off_climbable;
       switch (other.body.collisionType) {
         case me.collision.types.WORLD_SHAPE:
           /****************************/
@@ -533,12 +475,15 @@ game.player_entity = me.Entity.extend(
           /* player ladder climb check */
           /*****************************/
           if ((other.name === "climbable_ladder") && (other.type === "platform_pass_through")) {
-            if ((Math.floor(this.pos.y) > other.ladder_top_position) && (Math.floor(this.pos.y) <= other.ladder_bottom_position)) {
-              this.player_climbable_states = player_states.player_in_climbable;
-            }
-            else if ((Math.floor(this.pos.y) < other.ladder_top_position) && (Math.floor(this.pos.x) >= other.ladder_left_position)) {
+            if ((Math.floor(this.pos.y) <= other.ladder_top_position) && (Math.floor(this.pos.x) >= other.ladder_left_position) && (Math.floor(this.pos.x) <= other.ladder_right_position)) {
               this.player_climbable_states = player_states.player_on_climbable;
+              console.log("on ladder");
             }
+            else if (((Math.floor(this.pos.x) >= other.ladder_left_position) && (Math.floor(this.pos.y) >= other.ladder_top_position)) && 
+                ((Math.floor(this.pos.x) <= other.ladder_right_position) && (Math.floor(this.pos.y) <= other.ladder_bottom_position))) {
+              this.player_climbable_states = player_states.player_in_climbable;
+              console.log("in ladder");
+            } 
           }
 
           /****************************/
@@ -548,23 +493,9 @@ game.player_entity = me.Entity.extend(
             if ((Math.floor(this.pos.y) > other.chain_top_position) && (Math.floor(this.pos.y) <= other.chain_bottom_position)) {
               this.player_climbable_states = player_states.player_in_climbable;
             }
-            else if ((Math.floor(this.pos.y) < other.chain_top_position) && (Math.floor(this.pos.x) >= other.chain_left_position)) {
+            else if ((Math.floor(this.pos.y) < other.chain_top_position) && (Math.floor(this.pos.x) >= other.chain_right_position)) {
               this.player_climbable_states = player_states.player_on_climbable;
             }
-          }
-
-          /*******************/
-          /* static platform */
-          /*******************/
-          if (other.type === "platform_pass_through") {
-            if (this.body.falling && !me.input.isKeyPressed("player_down") && (response.overlapV.y > 0) && (~~this.body.vel.y >= ~~response.overlapV.y)) {
-              // Disable collision on the x axis
-              response.overlapV.x = 0;
-              // Repond to the platform (pass through)
-              return true;
-            }
-            // Do not respond to the platform (it is solid)
-            return false;
           }
 
           /*****************/
@@ -585,7 +516,21 @@ game.player_entity = me.Entity.extend(
           if (other.type === "trap_hazard") {
             //this.hurt(other.explosive_trap_hit_points);
           }
-          break;
+
+          /********************************/
+          /* static pass through platform */
+          /********************************/
+          if (other.type === "platform_pass_through") {
+            if (this.body.falling && !me.input.isKeyPressed("player_down") && (response.overlapV.y > 0) && (~~this.body.vel.y >= ~~response.overlapV.y)) {
+              // Disable collision on the x axis
+              response.overlapV.x = 0;
+              // Repond to the platform (pass through)
+              return true;
+            }
+            // Do not respond to the platform (it is solid)
+            return false;
+          }
+        break;
 
         case me.collision.types.ENEMY_OBJECT:
           if (!other.isMovingEnemy) {
@@ -607,7 +552,7 @@ game.player_entity = me.Entity.extend(
             // Not solid
             return false;
           }
-          break;
+        break;
 
         case me.collision.types.ACTION_OBJECT:
           // If the entity jumped onto a spring.
@@ -627,7 +572,7 @@ game.player_entity = me.Entity.extend(
             this.action.enabled = true;
             this.action.other = other;
           }
-          break;
+        break;
 
         default:
           // Do not respond to other objects (e.g. coins)
@@ -639,6 +584,79 @@ game.player_entity = me.Entity.extend(
     /****************************************/
     /* end player/platform colision handler */
     /****************************************/
+
+    /***************************/
+    /* player keyboard handler */
+    /***************************/
+    playerKeyboardCheck: function () {
+      /********************************/
+      /* player controller key states */
+      /*********************************/
+      /* keypress player left position */
+      /*********************************/
+      if (me.input.isKeyPressed("player_left")) {
+        this.player_current_states = player_states.player_facing_left;//player left game state
+      }
+
+      /**********************************/
+      /* keypress player right position */
+      /**********************************/
+      else if (me.input.isKeyPressed("player_right")) {
+        this.player_current_states = player_states.player_facing_right;//player right game state
+      }
+
+      /***********************************/
+      /* keypress player climb up ladder */
+      /***********************************/
+      else if (me.input.isKeyPressed('player_climb_up')) {
+        this.player_current_states = player_states.player_climb_up//player climb up game state
+      }
+
+      /*************************************/
+      /* keypress player climb down ladder */
+      /*************************************/
+      else if (me.input.isKeyPressed("player_climb_down")) {
+        this.player_current_states = player_states.player_climb_down;//player climb down game state
+      }
+
+      /**********************************/
+      /* keypress right player crawling */
+      /**********************************/
+      else if (me.input.isKeyPressed("player_crawl_right")) {
+        this.player_current_states = player_states.player_crawl_right;//player crawl right game state
+      }
+
+      /*********************************/
+      /* keypress left player crawling */
+      /*********************************/
+      else if (me.input.isKeyPressed("player_crawl_left")) {
+        this.player_current_states = player_states.player_crawl_left;//player crawl left game state
+      }
+
+      /**********************************************/
+      /* update player state standing doing nothing */
+      /**********************************************/
+      else {
+        this.player_current_states = player_states.player_idle;//player idle game state
+      }
+
+      /*******************************************/
+      /* keypress player jumping and double jump */
+      /*******************************************/
+      if (me.input.isKeyPressed("player_jump")) {
+        this.player_current_states = player_states.player_jump_up;//player jump left game state
+        /*************************/
+        /* set jump flag to true */
+        /*************************/
+        this.body.jumping = true;
+      }
+      /**********************************/
+      /* end player movement key states */
+      /**********************************/
+    },
+    /*******************************/
+    /* end player keyboard handler */
+    /*******************************/
 
     /******************************/
     /* player controller movement */
@@ -659,6 +677,8 @@ game.player_entity = me.Entity.extend(
             this.anchorPoint.set(0.5, 0.5);
             this.change_animation("stand");
           }
+          this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x -8), Math.floor(this.pos.y - 12));
+          this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y -7));
           break;
 
         /*************************/
@@ -679,6 +699,8 @@ game.player_entity = me.Entity.extend(
             this.change_animation("walk");
             this.displayplayerimpactdustTrails();
           }
+          this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x -8), Math.floor(this.pos.y - 12));
+          this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y -7));
           break;
 
         /*************************/
@@ -699,6 +721,8 @@ game.player_entity = me.Entity.extend(
             this.change_animation("walk");
             this.displayplayerimpactdustTrails();
           }
+          this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x -8), Math.floor(this.pos.y - 12));
+          this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y -7));
           break;
 
         /****************************/
@@ -714,8 +738,43 @@ game.player_entity = me.Entity.extend(
               this.body.removeShape(this.body.getShape(0));
               this.body.addShape(new me.Rect(-3, -28, 28, 57));
               this.anchorPoint.set(0.5, 0.5);
-              this.change_animation("climb_over_up", (function () { this.pos.y = this.pos.y - 62; me.input.unbindKey(me.input.KEY.U, "player_climb_up"); }).bind(this));
+              this.change_animation("climb_over_up", (function () { this.pos.y = this.pos.y - 60; me.input.unbindKey(me.input.KEY.U, "player_climb_up"); }).bind(this));
             }
+            switch (this.renderable.getCurrentAnimationFrame()) {
+              case 10:
+                this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y - 68));
+                this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y - 63));               
+              break;
+              case 9:
+                this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y - 58));
+                this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y - 53));               
+              break;
+              case 8:
+                this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y - 53));
+                this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y - 48));               
+              break;
+              case 7:
+                this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y - 50));
+                this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y - 45));               
+              break;
+              case 6:
+                this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y - 45));
+                this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y - 40));               
+              break;
+              case 5:
+                this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y - 37));
+                this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y - 32));               
+              break;
+              case 4:
+                this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y - 27));
+                this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y - 22));               
+              break;
+              case 3: case 2: case 1: case 0:
+                this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y - 17));
+                this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y - 12));
+              break; 
+            }
+            console.log("frame num " + this.renderable.getCurrentAnimationFrame().toString());
           }
 
           if (this.player_climbable_states === "player_in_climbable") {
@@ -729,6 +788,8 @@ game.player_entity = me.Entity.extend(
               this.anchorPoint.set(0.5, 0.5);
               this.change_animation("climb_up");
             }
+            this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x -8), Math.floor(this.pos.y - 12));
+            this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y -7));
           }
           break;
 
@@ -747,6 +808,40 @@ game.player_entity = me.Entity.extend(
               this.anchorPoint.set(0.5, 0.5);
               this.change_animation("climb_over_down", (function () { this.pos.y = this.pos.y + 64; window.setTimeout(() => { me.input.bindKey(me.input.KEY.U, "player_climb_up"); }, 4); }).bind(this));
             }
+            switch (this.renderable.getCurrentAnimationFrame()) {
+              case 1:
+                this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x - 8), Math.floor(this.pos.y));
+                this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y + 5));
+              break;
+              case 2:
+                this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x -8), Math.floor(this.pos.y + 5));
+                this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y + 10));
+              break;
+              case 3:
+                this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x - 8), Math.floor(this.pos.y + 10));
+                this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y + 15));
+              break;
+              case 4:
+                this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x - 8), Math.floor(this.pos.y + 15));
+                this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y + 20));
+              break;
+              case 5:
+                this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y + 20));
+                this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y + 25));               
+              break;
+              case 6:
+                this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y + 25));
+                this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y + 30));
+              break;
+              case 7:
+                this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y + 45));
+                this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y + 50));
+              break;
+              case 8: case 9: case 10: case 11:
+                this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y + 45));
+                this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y + 50));
+              break;  
+            }
           }
           
           if (this.player_climbable_states === "player_in_climbable") {
@@ -760,6 +855,8 @@ game.player_entity = me.Entity.extend(
               this.anchorPoint.set(0.5, 0.5);
               this.change_animation("climb_down");
             }
+            this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x -8), Math.floor(this.pos.y - 12));
+            this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y -7));
           }
           break;
 
@@ -777,6 +874,8 @@ game.player_entity = me.Entity.extend(
             this.anchorPoint.set(0.5, 0.5);
             this.change_animation("crawl");
           }
+          this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x - 6), Math.floor(this.pos.y - 12));
+          this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x - 6), Math.floor(this.pos.y -7));
           break;
 
         /******************************/
@@ -793,6 +892,8 @@ game.player_entity = me.Entity.extend(
             this.anchorPoint.set(0.5, 0.5);
             this.change_animation("crawl");
           }
+          this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x - 6), Math.floor(this.pos.y - 12));
+          this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x - 6), Math.floor(this.pos.y -7));
           break;
 
         /***************************/
@@ -803,6 +904,8 @@ game.player_entity = me.Entity.extend(
             // easy "math" for double jump
             this.body.force.y -= this.body.maxVel.y * this.multipleJump++;
           }
+          this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x -8), Math.floor(this.pos.y - 12));
+          this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y -7));
           break;
 
         default:
@@ -845,7 +948,7 @@ game.player_entity = me.Entity.extend(
       /****************************/
       /* update player health bar */
       /****************************/
-      this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x - 8), Math.floor(this.pos.y - 12));
+      this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x), Math.floor(this.pos.y - 12));
       /**************************/
       /* update player mana bar */
       /**************************/

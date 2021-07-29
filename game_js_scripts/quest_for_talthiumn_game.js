@@ -113,25 +113,25 @@ var game =
     /* platform physical entity effects objects */
     /********************************************/
       me.pool.register("climbable_ladder", game.platform_ladder_entity, true);
-      me.pool.register("climbable_chain", game.platform_chain_entity, true);
-      me.pool.register("floating_platform", game.moving_platform_entity, true);
-      me.pool.register("vanishing_platform", game.vanishing_platform_entity, true);
+      //me.pool.register("climbable_chain", game.platform_chain_entity, true);
+      //me.pool.register("floating_platform", game.moving_platform_entity, true);
+      //me.pool.register("vanishing_platform", game.vanishing_platform_entity, true);
 
     /**********************************/
     /* enemies entity effects object */
     /**********************************/
-      me.pool.register("enemies_spawn_trigger", game.enemies_spawn_trigger, true);
+      //me.pool.register("enemies_spawn_trigger", game.enemies_spawn_trigger, true);
 
     /*****************************************/
     /* platform entity player damage objects */
     /*****************************************/
       me.pool.register("stationary_spike", game.stationary_spike_entity, true);
-      me.pool.register("explosive_trap", game.explosive_trap_entity, true);
+      //me.pool.register("explosive_trap", game.explosive_trap_entity, true);
     
     /***********************************/
     /* general game background objects */
     /***********************************/
-      me.pool.register("stationary_flame_torch", game.flame_torch_entity, true);
+      //me.pool.register("stationary_flame_torch", game.flame_torch_entity, true);
 
     /***************************/
     /* game level task objects */
@@ -189,7 +189,7 @@ var game =
         /**********************************/
         /* player climb ladder up or down */
         /**********************************/ 
-          me.input.unbindKey(me.input.KEY.U, "player_climb_up");
+          me.input.bindKey(me.input.KEY.U, "player_climb_up");
           me.input.bindKey(me.input.KEY.J, "player_climb_down");
 
         /***************************************************/
