@@ -2,6 +2,7 @@
 
  game.main_game_interface_display = me.Renderable.extend({
  
+  
    init: function () {
      this._super(me.Renderable, "init",
        [
@@ -21,7 +22,7 @@
  
      this.main_game_interface_sprite = new me.Sprite(screen_width - 309, screen_height - 119, {
        image: "main_game_interface",
-       framewidth: 616,
+       framewidth: 617,
        frameheight: 109,
        anchorPoint: new me.Vector2d(0.5, 0.5)
      });

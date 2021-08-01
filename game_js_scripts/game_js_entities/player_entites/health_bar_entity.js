@@ -16,7 +16,7 @@ game.generic_health_bar_entity = me.Renderable.extend(
       this.health = 1;
       this.currentHealth = 1;
       this.setPlayerHealthBar(this.hitPoints);
-      this.borderColor = '#000';
+      this.borderColor = '#000000';
       this.alwaysUpdate = false;
     },
 
@@ -29,9 +29,9 @@ game.generic_health_bar_entity = me.Renderable.extend(
       if (this.health >= 0) {
         renderer.setColor(this.borderColor);
         renderer.fillRect(this.pos.x, this.pos.y, this.width, this.height);;
-        renderer.setColor('#F00');
+        renderer.setColor('#808080');
         renderer.fillRect(this.pos.x + 1, this.pos.y + 1, this.width - 2, this.height - 2);
-        renderer.setColor('#0F0');
+        renderer.setColor('#bb0a1e');
         if (this.health > 1) {
           renderer.fillRect(this.pos.x + 1, this.pos.y + 1, this.width - 2, this.height - 2);
         }
