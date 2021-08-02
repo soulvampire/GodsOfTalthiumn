@@ -12,8 +12,14 @@ game.play_screen = me.Stage.extend({
         me.game.world.addChild(new game.player_hud_mana_health_sprite(), 100);
         me.game.world.addChild(new game.main_game_interface_display(), 100);
 
-        var floating_map_window = new game.floating_map_display();
-        me.game.world.addChild(floating_map_window, 101);
+        this.floating_map_window = new game.floating_map_panel();
+
+
+        this.floating_map_window.addChild(new game.floating_map_attach_button());
+        this.floating_map_window.addChild(new game.floating_map_minimize_button());
+        this.floating_map_window.addChild(new game.floating_map_node_points_button());
+        
+        me.game.world.addChild(this.floating_map_window, 100);
     },
     /**
      *  action to perform when leaving this screen (state change)

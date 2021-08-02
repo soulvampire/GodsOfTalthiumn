@@ -65,6 +65,11 @@ game.resources = [
         {name: "player_mana_health_bar", type: "image", src: "game_data/game_hud/player_hud/player_mana_health_bar.png"},
         {name: "main_game_interface", type: "image", src: "game_data/game_hud/game_interface/main_interface.png"},
         {name: "map_interface", type: "image", src: "game_data/game_hud/game_interface/map_interface.png"},
+        {name: "map_attach_button_normal", type: "image", src: "game_data/game_hud/game_interface/map_attach_normal.png"},
+        {name: "map_minimize_button_normal", type: "image", src: "game_data/game_hud/game_interface/map_minimize_normal.png"},
+        {name: "map_node_points_button_normal", type: "image", src: "game_data/game_hud/game_interface/map_node_points_normal.png"},
+        
+
     
     /***************************/
     /* world 1, (castle level) */

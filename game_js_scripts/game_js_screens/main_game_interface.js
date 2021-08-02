@@ -13,9 +13,6 @@
  
      // make sure we use screen coordinates
      this.floating = true;
- 
-     // make sure our object is always draw first
-     this.z = 100;  
      
      var screen_width = me.game.viewport.width / 2;
      var screen_height = me.game.viewport.height;
