@@ -10,7 +10,6 @@ game.generic_health_bar_entity = me.Renderable.extend(
 
       this.anchorPoint.set(0.0, 0.0);
 
-      this.z = 100;
       this.hitPoints = hitPoints;
       this.maxHitPoints = maxHitPoints;
       this.health = 1;

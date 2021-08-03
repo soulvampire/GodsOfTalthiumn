@@ -4,7 +4,7 @@ game.floating_map_node_points_button = me.GUI_Object.extend ( {
 
   init: function () {
 
-		this._super(me.GUI_Object, "init", [3, 104, {
+		this._super(me.GUI_Object, "init", [4, 105, {
 			image: "map_node_points_button_normal",
       framewidth: 18,
       frameheight: 18,

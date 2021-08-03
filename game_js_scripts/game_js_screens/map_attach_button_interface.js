@@ -4,7 +4,7 @@ game.floating_map_attach_button = me.GUI_Object.extend ( {
 
   init: function () {
 
-		this._super(me.GUI_Object, "init", [3, 3, {
+		this._super(me.GUI_Object, "init", [4, 4, {
 			image: "map_attach_button_normal",
       framewidth: 18,
       frameheight: 18,

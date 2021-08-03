@@ -4,7 +4,7 @@ game.floating_map_minimize_button = me.GUI_Object.extend ( {
 
   init: function () {
 
-		this._super(me.GUI_Object, "init", [84, 3, {
+		this._super(me.GUI_Object, "init", [85, 4, {
 			image: "map_minimize_button_normal",
       framewidth: 18,
       frameheight: 18,

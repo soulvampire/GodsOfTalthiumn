@@ -14,12 +14,11 @@ game.play_screen = me.Stage.extend({
 
         this.floating_map_window = new game.floating_map_panel();
 
-
-        this.floating_map_window.addChild(new game.floating_map_attach_button());
-        this.floating_map_window.addChild(new game.floating_map_minimize_button());
-        this.floating_map_window.addChild(new game.floating_map_node_points_button());
+        this.floating_map_window.addChild(new game.floating_map_attach_button(),100);
+        this.floating_map_window.addChild(new game.floating_map_minimize_button(), 100);
+        this.floating_map_window.addChild(new game.floating_map_node_points_button(), 100);
         
-        me.game.world.addChild(this.floating_map_window, 100);
+        me.game.world.addChild(this.floating_map_window,101);
     },
     /**
      *  action to perform when leaving this screen (state change)

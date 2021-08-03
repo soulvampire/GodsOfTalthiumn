@@ -7,7 +7,8 @@ game.floating_map_panel = me.Container.extend ( {
         var screen_width = me.game.viewport.width;
 
         // call the constructor
-        this._super(me.Container, "init", [screen_width - 115, 10, 105, 125]);
+        this._super(me.Container, "init", [screen_width - 115, 10, 107, 127]);
+        
         this.anchorPoint.set(0.0, 0.0);
 
         // persistent across level change
@@ -22,13 +23,12 @@ game.floating_map_panel = me.Container.extend ( {
         /********************/
         /* panel background */
         /********************/
-        this.floating_map_Sprite = new me.Sprite(0, 0, {
+        this.floating_map_Sprite = new me.Sprite(1, 1, {
             image: "map_interface",
             framewidth: 105,
             frameheight: 125,
             anchorPoint: new me.Vector2d(0.0, 0.0)
           });
-
         this.addChild(this.floating_map_Sprite);
 
         // input status flags
