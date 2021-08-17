@@ -4,12 +4,8 @@ game.generic_mana_bar_entity = me.Renderable.extend(
 	{
 		init: function (hitPoints, maxHitPoints, hp_pos_x, hp_pos_y, mana_bar_width, mana_bar_height) {
 			this._super(me.Renderable, "init", [hp_pos_x, hp_pos_y, mana_bar_width, mana_bar_height]);
-
-			// give a name
 			this.name = "gereric_mana_bar";
-
 			this.anchorPoint.set(0.0, 0.0);
-
 			this.hitPoints = hitPoints;
 			this.maxHitPoints = maxHitPoints;
 			this.mana = 1;

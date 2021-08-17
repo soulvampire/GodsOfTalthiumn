@@ -4,6 +4,7 @@ game.resources = [
     /******************/
         {name: "character_movement_right", type: "image", src: "game_data/game_sprites/player_sprites/character_movement_right.png"},
         {name: "character_movement_right", type: "json", src: "game_data/game_sprites/player_sprites/character_movement_right.json"},
+        
         {name: "dust_particle", type: "image", src: "game_data/game_sprites/player_sprites/player_dust_trail.png"},
         {name: "blood_particle", type: "image", src: "game_data/game_sprites/player_sprites/blood_trail.png"},
         {name: "hp_bar_frame", type: "image", src: "game_data/game_sprites/player_sprites/hp_bar.png"},
@@ -22,11 +23,6 @@ game.resources = [
     /* map graphics (png) */
     /**********************/
         {name: "castle_level_image", type:"image", src: "game_data/game_images/game_map_images/game_world01/map_castle_level/castle_level_image.png"},
-
-    /***********************/
-    /* dialog window (png) */
-    /***********************/
-        {name: "dialog_box", type: "image", src: "game_data/game_images/game_map_images/dialog_box.png"},
 
     /******************/
     /* platform spike */
@@ -58,19 +54,16 @@ game.resources = [
         {name: "platform_3", type: "image", src: "game_data/game_images/game_map_images/game_world01/map_castle_level/platform_3.png"},
         {name: "platform_4", type: "image", src: "game_data/game_images/game_map_images/game_world01/map_castle_level/platform_4.png"},
 
-    /*************************/
-    /* player info bar image */
-    /*************************/
-        {name: "player_plaque", type: "image", src: "game_data/game_hud/player_hud/player_plaque.png"},
-        {name: "player_mana_health_bar", type: "image", src: "game_data/game_hud/player_hud/player_mana_health_bar.png"},
-        {name: "main_game_interface", type: "image", src: "game_data/game_hud/game_interface/main_interface.png"},
-        {name: "map_interface", type: "image", src: "game_data/game_hud/game_interface/map_interface.png"},
-        {name: "map_attach_button_normal", type: "image", src: "game_data/game_hud/game_interface/map_attach_normal.png"},
-        {name: "map_minimize_button_normal", type: "image", src: "game_data/game_hud/game_interface/map_minimize_normal.png"},
-        {name: "map_node_points_button_normal", type: "image", src: "game_data/game_hud/game_interface/map_node_points_normal.png"},
-        
+    /****************************/
+    /* main rpg interface image */
+    /****************************/
+        /************************************/
+        /* main rpg interface texture files */
+        /************************************/
+        {name: "main_game_interface", type: "image", src: "game_data/game_hud/game_interface/main_interface/main_game_interface.png"},
+        {name: "main_game_interface", type: "json", src: "game_data/game_hud/game_interface/main_interface/main_game_interface.json"},
 
-    
+
     /***************************/
     /* world 1, (castle level) */
     /***************************/
@@ -83,28 +76,4 @@ game.resources = [
         /* map tilesets (tsx) */
         /**********************/
         {name: "world01_area01_castle",  type: "tsx", src: "game_data/game_maps/game_world01/map_castle_level/world01_area01_castle.tsx"},
-
-    /**************/
-    /* text fonts */
-    /**************/
-        { name: "default_font", type:"image", src: "game_data/game_fonts/default_font/default_font.png"},
-        { name: "default_font", type:"binary", src: "game_data/game_fonts/default_font/default_font.fnt"},
-
-        { name: "amble_bold", type:"image", src: "game_data/game_fonts/amble_font/amble_bold.png"},
-        { name: "amble_bold", type:"binary", src: "game_data/game_fonts/amble_font/amble_bold.fnt"},
-
-        { name: "aller_reg", type:"image", src: "game_data/game_fonts/aller_font/aller_reg.png"},
-        { name: "aller_reg", type:"binary", src: "game_data/game_fonts/aller_font/aller_reg.fnt"},
-
-        { name: "tahoma_reg", type:"image", src: "game_data/game_fonts/tahoma_font/tahoma_reg.png"},
-        { name: "tahoma_reg", type:"binary", src: "game_data/game_fonts/tahoma_font/tahoma_reg.fnt"},
-
-        { name: "times_reg", type:"image", src: "game_data/game_fonts/times_font/times_reg.png"},
-        { name: "times_reg", type:"binary", src: "game_data/game_fonts/times_font/times_reg.fnt"},
-
-        { name: "times_bold", type:"image", src: "game_data/game_fonts/times_font/times_bold.png"},
-        { name: "times_bold", type:"binary", src: "game_data/game_fonts/times_font/times_bold.fnt"},
-
-        { name: "8x8_font_blue", type:"image", src: "/game_data/game_fonts/other_fonts/8x8_font_blue.png"},
-        { name: "16x16_font_blue", type:"image", src: "/game_data/game_fonts/other_fonts/16x16_font_blue.png"},
 ];

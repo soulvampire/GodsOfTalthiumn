@@ -1,0 +1,228 @@
+{"frames": [
+
+{
+	"filename": "game_log_dialog_box_max_normal",
+	"frame": {"x":617,"y":100,"w":171,"h":123},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":171,"h":123},
+	"sourceSize": {"w":171,"h":123}
+},
+{
+	"filename": "game_log_dialog_box_min_normal",
+	"frame": {"x":646,"y":0,"w":171,"h":56},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":171,"h":56},
+	"sourceSize": {"w":171,"h":56}
+},
+{
+	"filename": "main_interface_normal",
+	"frame": {"x":0,"y":100,"w":617,"h":119},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":617,"h":119},
+	"sourceSize": {"w":617,"h":119}
+},
+{
+	"filename": "map_attach_highlight",
+	"frame": {"x":72,"y":0,"w":18,"h":18},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":18,"h":18},
+	"sourceSize": {"w":18,"h":18}
+},
+{
+	"filename": "map_attach_normal",
+	"frame": {"x":90,"y":0,"w":18,"h":18},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":18,"h":18},
+	"sourceSize": {"w":18,"h":18}
+},
+{
+	"filename": "map_attach_pressed",
+	"frame": {"x":108,"y":0,"w":18,"h":18},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":18,"h":18},
+	"sourceSize": {"w":18,"h":18}
+},
+{
+	"filename": "map_interface_highlight",
+	"frame": {"x":788,"y":100,"w":105,"h":126},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":105,"h":126},
+	"sourceSize": {"w":105,"h":126}
+},
+{
+	"filename": "map_interface_normal",
+	"frame": {"x":893,"y":100,"w":105,"h":126},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":105,"h":126},
+	"sourceSize": {"w":105,"h":126}
+},
+{
+	"filename": "map_minimize_highlight",
+	"frame": {"x":126,"y":0,"w":18,"h":18},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":18,"h":18},
+	"sourceSize": {"w":18,"h":18}
+},
+{
+	"filename": "map_minimize_normal",
+	"frame": {"x":144,"y":0,"w":18,"h":18},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":18,"h":18},
+	"sourceSize": {"w":18,"h":18}
+},
+{
+	"filename": "map_minimize_pressed",
+	"frame": {"x":162,"y":0,"w":18,"h":18},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":18,"h":18},
+	"sourceSize": {"w":18,"h":18}
+},
+{
+	"filename": "map_node_points_highlight",
+	"frame": {"x":180,"y":0,"w":18,"h":18},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":18,"h":18},
+	"sourceSize": {"w":18,"h":18}
+},
+{
+	"filename": "map_node_points_normal",
+	"frame": {"x":198,"y":0,"w":18,"h":18},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":18,"h":18},
+	"sourceSize": {"w":18,"h":18}
+},
+{
+	"filename": "map_node_points_pressed",
+	"frame": {"x":216,"y":0,"w":18,"h":18},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":18,"h":18},
+	"sourceSize": {"w":18,"h":18}
+},
+{
+	"filename": "message_dialog_box_max_normal",
+	"frame": {"x":817,"y":0,"w":171,"h":100},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":171,"h":100},
+	"sourceSize": {"w":171,"h":100}
+},
+{
+	"filename": "message_dialog_box_min_normal",
+	"frame": {"x":234,"y":0,"w":171,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":171,"h":32},
+	"sourceSize": {"w":171,"h":32}
+},
+{
+	"filename": "player_mana_health_bar_normal",
+	"frame": {"x":545,"y":0,"w":101,"h":38},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":101,"h":38},
+	"sourceSize": {"w":101,"h":38}
+},
+{
+	"filename": "player_plaque_normal",
+	"frame": {"x":405,"y":0,"w":35,"h":33},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":35,"h":33},
+	"sourceSize": {"w":35,"h":33}
+},
+{
+	"filename": "spell_object_button_highlight",
+	"frame": {"x":440,"y":0,"w":35,"h":33},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":35,"h":33},
+	"sourceSize": {"w":35,"h":33}
+},
+{
+	"filename": "spell_object_button_normal",
+	"frame": {"x":475,"y":0,"w":35,"h":33},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":35,"h":33},
+	"sourceSize": {"w":35,"h":33}
+},
+{
+	"filename": "spell_object_button_pressed",
+	"frame": {"x":510,"y":0,"w":35,"h":33},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":35,"h":33},
+	"sourceSize": {"w":35,"h":33}
+},
+{
+	"filename": "spell_object_expand_highlight",
+	"frame": {"x":0,"y":0,"w":12,"h":12},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":12,"h":12},
+	"sourceSize": {"w":12,"h":12}
+},
+{
+	"filename": "spell_object_expand_normal",
+	"frame": {"x":12,"y":0,"w":12,"h":12},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":12,"h":12},
+	"sourceSize": {"w":12,"h":12}
+},
+{
+	"filename": "spell_object_expand_pressed",
+	"frame": {"x":24,"y":0,"w":12,"h":12},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":12,"h":12},
+	"sourceSize": {"w":12,"h":12}
+},
+{
+	"filename": "spell_object_information_highlight",
+	"frame": {"x":36,"y":0,"w":12,"h":12},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":12,"h":12},
+	"sourceSize": {"w":12,"h":12}
+},
+{
+	"filename": "spell_object_information_normal",
+	"frame": {"x":48,"y":0,"w":12,"h":12},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":12,"h":12},
+	"sourceSize": {"w":12,"h":12}
+},
+{
+	"filename": "spell_object_information_pressed",
+	"frame": {"x":60,"y":0,"w":12,"h":12},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":12,"h":12},
+	"sourceSize": {"w":12,"h":12}
+}],
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "main_game_interface.png",
+	"format": "RGBA8888",
+	"size": {"w":998,"h":226},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:d91caef3636539f7ec1e974d205c9e82:7cd85a588df94b587e29339e9c582711:221c3d0235bfd927b6e51d401cd07b41$"
+}
+}

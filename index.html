@@ -21,10 +21,13 @@
     	<!-- end canvas placeholder -->
         
 		<!-- melonJS Library -->
-      		<script type = "text/javascript" src="game_js_library/js_melonjs.js"></script>
+      	<script type = "text/javascript" src="game_js_library/melonjs_version_v8/melonjs.js"></script>
+
+		<!-- jQuery Library -->
+      <script type = "text/javascript" src="game_js_library/jquery/jquery_slim.js"></script>
 
 		<!-- Plugin(s) -->
-			<script type = "text/javascript" src="game_js_library/game_js_plugins/game_js_debug/js_debug_panel.js"></script>
+			<script type = "text/javascript" src="game_js_library/game_js_plugins/game_js_debug_v8/debugPanel.js"></script>
 
 		<!-- game scripts -->
 			<!-- game start script -->
@@ -34,14 +37,10 @@
 				<script type = "text/javascript" src="game_js_scripts/game_resources.js"></script>
 
 			<!-- game on screen display script -->
-				<script type = "text/javascript" src="game_js_scripts/game_js_screens/player_plaque.js"></script>
-				<script type = "text/javascript" src="game_js_scripts/game_js_screens/player_mana_health_bar_sprite.js"></script>
 				<script type = "text/javascript" src="game_js_scripts/game_js_screens/main_game_interface.js"></script>
-				<script type = "text/javascript" src="game_js_scripts/game_js_screens/map_interface.js"></script>
-				<script type = "text/javascript" src="game_js_scripts/game_js_screens/map_attach_button_interface.js"></script>
-				<script type = "text/javascript" src="game_js_scripts/game_js_screens/map_minimize_button_interface.js"></script>
-				<script type = "text/javascript" src="game_js_scripts/game_js_screens/map_node_points_button_interface.js"></script>
-
+				<script type = "text/javascript" src="game_js_scripts/game_js_screens/generic_button_interface.js"></script>
+				<script type = "text/javascript" src="game_js_scripts/game_js_screens/floating_generic_panel.js"></script>
+				<script type = "text/javascript" src="game_js_scripts/game_js_screens/floating_text_box.js"></script>
 
 			<!-- game dialog window script -->
 			<!--	<script type="text/javascript" src="game_js_scripts/dialog_window.js"></script> -->
@@ -53,13 +52,12 @@
 				<script type = "text/javascript" src = "game_js_scripts/game_js_entities/player_entites/player_entity.js"></script>
 				<script type = "text/javascript" src = "game_js_scripts/game_js_entities/player_entites/health_bar_entity.js"></script>
 				<script type = "text/javascript" src = "game_js_scripts/game_js_entities/player_entites/mana_bar_entity.js"></script>
-				<script type = "text/javascript" src = "game_js_scripts/game_js_entities/player_entites/player_level_icon_entity.js"></script>
 				<script type = "text/javascript" src = "game_js_scripts/game_js_entities/player_entites/dust_trail.js"></script>
 				<script type = "text/javascript" src = "game_js_scripts/game_js_entities/player_entites/impact_dust_trail.js"></script>
 				<script type = "text/javascript" src = "game_js_scripts/game_js_entities/player_entites/blood_trail.js"></script>
 
 			<!-- player damage text script -->
-			<script type = "text/javascript" src="game_js_scripts/game_js_entities/generic_floating_text_renderable.js"></script>
+			<script type = "text/javascript" src="game_js_scripts/game_js_entities/generic_floating_text_entity.js"></script>
 
 			<!-- platform hazards script -->
 				<script type = "text/javascript" src = "game_js_scripts/game_js_entities/platform_entites/stationary_spike_entity.js"></script>

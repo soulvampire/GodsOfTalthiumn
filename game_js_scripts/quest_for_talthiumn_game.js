@@ -19,6 +19,7 @@ var game =
     //player mana bar
     player_current_mana: 100,
     player_max_mana : 100,
+
   },
 
   /****************/
@@ -67,14 +68,10 @@ var game =
   onload: function () 
   {
     // Initialize the video.
-    if (!me.video.init(800, 600, {wrapper : "screen", scale : "auto", scaleMethod : "flex-width", renderer : me.video.AUTO, subPixel : false })) 
+    if (!me.video.init(800, 600, {wrapper : "screen", scale : "auto", scaleMethod : "flex-width", renderer : me.video.AUTO, subPixel : false, antiAlias : true})) 
     {
-      alert("Your browser does not support HTML5 canvas.");
       return;
     }
-      
-    // Initialize the audio.
-    me.audio.init("mp3,ogg");
 
     // set and load all resources.
     // (this will also automatically switch to the loading screen)
@@ -102,7 +99,7 @@ var game =
     /*********************************/
       me.pool.register("player_dust_trails", game.dust_trail, true);
       me.pool.register("impact_dust_trails", game.impact_dust_trail, true);
-      me.pool.register("generic_floating_text", game.generic_floating_text_renderable, true);
+      me.pool.register("generic_floating_text", game.generic_floating_text_entity, true);
 
     /*********************************/
     /* player entity damage object */
@@ -146,13 +143,21 @@ var game =
     /*****************************/
       me.pool.register("enemy_spawn_manager", game.enemy_spawn_manager, false);
 
-    /*******************************/
-    /* load the texture atlas file */
-    /*******************************/
+    /********************************/
+    /* load the player texture file */
+    /********************************/
       game.player_sprites = new me.video.renderer.Texture(
         me.loader.getJSON("character_movement_right"),
         me.loader.getImage("character_movement_right")
       );
+
+    /**********************************************/
+    /* load the main interface texture atlas file */
+    /**********************************************/
+    game.interface_sprites = new me.video.renderer.Texture(
+      me.loader.getJSON("main_game_interface"),
+      me.loader.getImage("main_game_interface")
+    );
 
     /**************************/
     /* game keyboard controls */

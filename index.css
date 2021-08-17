@@ -31,3 +31,11 @@ body {
 	image-rendering: optimize-contrast;
 	-ms-interpolation-mode: nearest-neighbor;
 }
+
+#screen {
+    position: relative;
+}
+
+#screen textarea {
+    position: absolute;
+}

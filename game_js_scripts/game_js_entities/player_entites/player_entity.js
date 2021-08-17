@@ -1,3 +1,5 @@
+game = game || {};
+
 /**************************/
 /* player movement states */
 /**************************/
@@ -17,8 +19,6 @@ const player_states =
   player_climb_up: "player_climb_up",
   player_climb_down: "player_climb_down"
 };
-
-game = game || {};
 
 /*****************/
 /* player entity */
@@ -60,48 +60,48 @@ game.player_entity = me.Entity.extend(
       /* climbing down animations = cd(character climb down) */
       /*******************************************************/
       this.renderable = game.player_sprites.createAnimationFromName(["cs_right_000",
-                                                              "cs_right_001",
-                                                              "cs_right_002",
-                                                              "cw_right_000",
-                                                              "cw_right_001",
-                                                              "cw_right_002",
-                                                              "cw_right_003",
-                                                              "cw_right_004",
-                                                              "cw_right_005",
-                                                              "cc_right_000",
-                                                              "cc_right_001",
-                                                              "cc_right_002",
-                                                              "cc_right_003",
-                                                              "cc_right_004",
-                                                              "cc_right_005",
-                                                              "cr_right_000",
-                                                              "cr_right_001",
-                                                              "cr_right_002",
-                                                              "cr_right_003",
-                                                              "cr_right_004",
-                                                              "cr_right_005",
-                                                              "cj_right_000",
-                                                              "cj_right_001",
-                                                              "cj_right_002",
-                                                              "cj_right_003",
-                                                              "cu_right_000",
-                                                              "cu_right_001",
-                                                              "cu_right_002",
-                                                              "cu_right_003",
-                                                              "cu_right_004",
-                                                              "cu_right_005",
-                                                              "co_right_000",
-                                                              "co_right_001",
-                                                              "co_right_002",
-                                                              "co_right_003",
-                                                              "co_right_004",
-                                                              "co_right_005",
-                                                              "co_right_006",
-                                                              "co_right_007",
-                                                              "co_right_008",
-                                                              "co_right_009",
-                                                              "co_right_010",
-                                                              "co_right_011"]);
+        "cs_right_001",
+        "cs_right_002",
+        "cw_right_000",
+        "cw_right_001",
+        "cw_right_002",
+        "cw_right_003",
+        "cw_right_004",
+        "cw_right_005",
+        "cc_right_000",
+        "cc_right_001",
+        "cc_right_002",
+        "cc_right_003",
+        "cc_right_004",
+        "cc_right_005",
+        "cr_right_000",
+        "cr_right_001",
+        "cr_right_002",
+        "cr_right_003",
+        "cr_right_004",
+        "cr_right_005",
+        "cj_right_000",
+        "cj_right_001",
+        "cj_right_002",
+        "cj_right_003",
+        "cu_right_000",
+        "cu_right_001",
+        "cu_right_002",
+        "cu_right_003",
+        "cu_right_004",
+        "cu_right_005",
+        "co_right_000",
+        "co_right_001",
+        "co_right_002",
+        "co_right_003",
+        "co_right_004",
+        "co_right_005",
+        "co_right_006",
+        "co_right_007",
+        "co_right_008",
+        "co_right_009",
+        "co_right_010",
+        "co_right_011"]);
 
       /******************/
       /* idle animation */
@@ -203,6 +203,9 @@ game.player_entity = me.Entity.extend(
       /********************/
       /* player varaibles */
       /********************/
+
+        this.display_time = new Date(Date.now());
+
       /*************************/
       /* player starting level */
       /************************/
@@ -265,19 +268,70 @@ game.player_entity = me.Entity.extend(
       /************************/
       /* end player varaibles */
       /************************/
+
+      this.is_floating = true;
+			this.non_floating = false;
+      this.is_persistent = true;
+			this.non_persistent = false;
+      this.is_moveable = true;
+			this.is_non_moveable = false;
+			this.highlight_required = true;
+			this.non_highlight_required = false;
+
+			this.screen_width = me.game.viewport.width;
+			this.screen_height = me.game.viewport.height;
+
+      this.textarea_canvas_height = $(document).height();
+      this.textarea_canvas_width = $(document).width();
+
+      this.size_factor_height = this.textarea_canvas_height/this.screen_height;
+
+      console.log("size factor" + this.size_factor_height);
+
+      /***************************************/
+    	/* floating game log panel information */
+    	/***************************************/
+			  this.floating_game_log_panel = new game.floating_generic_panel(7,  (this.screen_height - 62), 171, 56, "game_log_dialog_box_min", this.is_floating, this.is_persistent, this.non_moveable);
+
+        this.floating_game_log_title  = new game.floating_textbox(21, (this.screen_height * 1.7) - 87, 1, 14, "Game Log Panel", 12);
+
+        this.floating_player_current_sequence = new game.floating_textbox(26, (this.screen_height * 1.7) - 55, 1, 44, "Player current sequence events", 9)
+        this.floating_player_previous_sequence = new game.floating_textbox(26, (this.screen_height * 1.7) - 17, 1, 50, "Player previous sequence events", 9)
+
+        this.floating_game_log_time = new game.floating_textbox(232, (this.screen_height * 1.7) - 87, 1, 10, (this.display_time.getHours().toString().padStart(2, '0') + ":" 
+                                    + this.display_time.getMinutes().toString().padStart(2, '0') + ":" + this.display_time.getMinutes().toString().padStart(2, '0')).toString(), 12);
+        window.setInterval(() => { 
+                                    this.display_time = new Date(Date.now());
+                                    this.floating_game_log_time.updateGameLogText(this.display_time.getHours().toString().padStart(2, '0') + ":" + this.display_time.getMinutes().toString().padStart(2, '0') + ":" + this.display_time.getSeconds().toString().padStart(2, '0'));
+                                  },900);	
+	
+			/*********************************************/
+			/* floating game log player text information */
+			/*********************************************/
       
+
+      
+
+			/***********************************/
+			/* display floating game log panel */
+			/***********************************/
+			me.game.world.addChild(this.floating_game_log_panel, 100);
+			/*******/
+			/* end */
+			/*******/
+
       /************************************/
       /* player health bar initial values */
       /************************************/
       this.player_head_health_bar = me.pool.pull("player_head_health_bar", game.data.player_current_health, game.data.player_max_health, this.pos.x - 8, this.pos.y - 12, 35, 4);
-      me.game.world.addChild( this.player_head_health_bar, 100);
+      me.game.world.addChild(this.player_head_health_bar, 100);
       this.player_head_health_bar.updateOnce = true;
 
-      this.player_health_bar = me.pool.pull("player_head_health_bar", game.data.player_current_health, game.data.player_max_mana, 48, 14, 95,8);
-      me.game.world.addChild(this.player_health_bar, 100);
-      this.player_health_bar.isPersistent = true;
-      this.player_health_bar.floating = true;
-      this.player_health_bar.updateOnce = true;
+      this.player_plaque_health_bar = me.pool.pull("player_head_health_bar", game.data.player_current_health, game.data.player_max_mana, 48, 14, 95, 8);
+      me.game.world.addChild(this.player_plaque_health_bar, 100);
+      this.player_plaque_health_bar.isPersistent = true;
+      this.player_plaque_health_bar.floating = true;
+      this.player_plaque_health_bar.updateOnce = true;
 
       /**********************************/
       /* player mana bar initial values */
@@ -286,11 +340,11 @@ game.player_entity = me.Entity.extend(
       me.game.world.addChild(this.player_head_mana_bar, 100);
       this.player_head_mana_bar.updateOnce = true;
 
-      this.player_mana_bar = me.pool.pull("player_head_mana_bar",game.data.player_current_mana, game.data.player_max_mana, 48, 22, 95, 8);
-      me.game.world.addChild( this.player_mana_bar , 100);
-      this.player_mana_bar.isPersistent = true;
-      this.player_mana_bar.floating = true;
-      this.player_mana_bar.updateOnce = true;
+      this.player_plaque_mana_bar = me.pool.pull("player_head_mana_bar", game.data.player_current_mana, game.data.player_max_mana, 48, 22, 95, 8);
+      me.game.world.addChild(this.player_plaque_mana_bar, 100);
+      this.player_plaque_mana_bar.isPersistent = true;
+      this.player_plaque_mana_bar.floating = true;
+      this.player_plaque_mana_bar.updateOnce = true;
     },
 
     /**************************/
@@ -415,7 +469,7 @@ game.player_entity = me.Entity.extend(
           this.playerimpactdusttrails.displayImpactDustTrails(Math.floor(this.playerPosition.x), Math.floor(this.playerPosition.y) + 53);
         }
       }
-      
+
       /*****************************/
       /* apply physics to the body */
       /*****************************/
@@ -479,11 +533,11 @@ game.player_entity = me.Entity.extend(
               this.player_climbable_states = player_states.player_on_climbable;
               console.log("on ladder");
             }
-            else if (((Math.floor(this.pos.x) >= other.ladder_left_position) && (Math.floor(this.pos.y) >= other.ladder_top_position)) && 
-                ((Math.floor(this.pos.x) <= other.ladder_right_position) && (Math.floor(this.pos.y) <= other.ladder_bottom_position))) {
+            else if (((Math.floor(this.pos.x) >= other.ladder_left_position) && (Math.floor(this.pos.y) >= other.ladder_top_position)) &&
+              ((Math.floor(this.pos.x) <= other.ladder_right_position) && (Math.floor(this.pos.y) <= other.ladder_bottom_position))) {
               this.player_climbable_states = player_states.player_in_climbable;
               console.log("in ladder");
-            } 
+            }
           }
 
           /****************************/
@@ -530,7 +584,7 @@ game.player_entity = me.Entity.extend(
             // Do not respond to the platform (it is solid)
             return false;
           }
-        break;
+          break;
 
         case me.collision.types.ENEMY_OBJECT:
           if (!other.isMovingEnemy) {
@@ -552,7 +606,7 @@ game.player_entity = me.Entity.extend(
             // Not solid
             return false;
           }
-        break;
+          break;
 
         case me.collision.types.ACTION_OBJECT:
           // If the entity jumped onto a spring.
@@ -572,7 +626,7 @@ game.player_entity = me.Entity.extend(
             this.action.enabled = true;
             this.action.other = other;
           }
-        break;
+          break;
 
         default:
           // Do not respond to other objects (e.g. coins)
@@ -677,8 +731,8 @@ game.player_entity = me.Entity.extend(
             this.anchorPoint.set(0.5, 0.5);
             this.change_animation("stand");
           }
-          this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x -8), Math.floor(this.pos.y - 12));
-          this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y -7));
+          this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x - 8), Math.floor(this.pos.y - 12));
+          this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x - 8), Math.floor(this.pos.y - 7));
           break;
 
         /*************************/
@@ -699,8 +753,8 @@ game.player_entity = me.Entity.extend(
             this.change_animation("walk");
             this.displayplayerimpactdustTrails();
           }
-          this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x -8), Math.floor(this.pos.y - 12));
-          this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y -7));
+          this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x - 8), Math.floor(this.pos.y - 12));
+          this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x - 8), Math.floor(this.pos.y - 7));
           break;
 
         /*************************/
@@ -721,8 +775,8 @@ game.player_entity = me.Entity.extend(
             this.change_animation("walk");
             this.displayplayerimpactdustTrails();
           }
-          this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x -8), Math.floor(this.pos.y - 12));
-          this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y -7));
+          this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x - 8), Math.floor(this.pos.y - 12));
+          this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x - 8), Math.floor(this.pos.y - 7));
           break;
 
         /****************************/
@@ -742,39 +796,38 @@ game.player_entity = me.Entity.extend(
             }
             switch (this.renderable.getCurrentAnimationFrame()) {
               case 10:
-                this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y - 68));
-                this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y - 63));               
-              break;
+                this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x - 8), Math.floor(this.pos.y - 68));
+                this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x - 8), Math.floor(this.pos.y - 63));
+                break;
               case 9:
-                this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y - 58));
-                this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y - 53));               
-              break;
+                this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x - 8), Math.floor(this.pos.y - 58));
+                this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x - 8), Math.floor(this.pos.y - 53));
+                break;
               case 8:
-                this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y - 53));
-                this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y - 48));               
-              break;
+                this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x - 8), Math.floor(this.pos.y - 53));
+                this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x - 8), Math.floor(this.pos.y - 48));
+                break;
               case 7:
-                this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y - 50));
-                this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y - 45));               
-              break;
+                this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x - 8), Math.floor(this.pos.y - 50));
+                this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x - 8), Math.floor(this.pos.y - 45));
+                break;
               case 6:
-                this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y - 45));
-                this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y - 40));               
-              break;
+                this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x - 8), Math.floor(this.pos.y - 45));
+                this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x - 8), Math.floor(this.pos.y - 40));
+                break;
               case 5:
-                this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y - 37));
-                this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y - 32));               
-              break;
+                this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x - 8), Math.floor(this.pos.y - 37));
+                this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x - 8), Math.floor(this.pos.y - 32));
+                break;
               case 4:
-                this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y - 27));
-                this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y - 22));               
-              break;
+                this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x - 8), Math.floor(this.pos.y - 27));
+                this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x - 8), Math.floor(this.pos.y - 22));
+                break;
               case 3: case 2: case 1: case 0:
-                this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y - 17));
-                this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y - 12));
-              break; 
+                this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x - 8), Math.floor(this.pos.y - 17));
+                this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x - 8), Math.floor(this.pos.y - 12));
+                break;
             }
-            console.log("frame num " + this.renderable.getCurrentAnimationFrame().toString());
           }
 
           if (this.player_climbable_states === "player_in_climbable") {
@@ -788,8 +841,8 @@ game.player_entity = me.Entity.extend(
               this.anchorPoint.set(0.5, 0.5);
               this.change_animation("climb_up");
             }
-            this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x -8), Math.floor(this.pos.y - 12));
-            this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y -7));
+            this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x - 8), Math.floor(this.pos.y - 12));
+            this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x - 8), Math.floor(this.pos.y - 7));
           }
           break;
 
@@ -806,44 +859,44 @@ game.player_entity = me.Entity.extend(
               this.body.removeShape(this.body.getShape(0));
               this.body.addShape(new me.Rect(-3, +29, 28, 57));
               this.anchorPoint.set(0.5, 0.5);
-              this.change_animation("climb_over_down", (function () { this.pos.y = this.pos.y + 64; window.setTimeout(() => { me.input.bindKey(me.input.KEY.U, "player_climb_up"); }, 4); }).bind(this));
+              this.change_animation("climb_over_down", (function () { this.pos.y = this.pos.y + 64; window.setTimeout(() => { me.input.bindKey(me.input.KEY.U, "player_climb_up");},4);}).bind(this));
             }
             switch (this.renderable.getCurrentAnimationFrame()) {
               case 1:
                 this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x - 8), Math.floor(this.pos.y));
-                this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y + 5));
-              break;
+                this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x - 8), Math.floor(this.pos.y + 5));
+                break;
               case 2:
-                this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x -8), Math.floor(this.pos.y + 5));
-                this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y + 10));
-              break;
+                this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x - 8), Math.floor(this.pos.y + 5));
+                this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x - 8), Math.floor(this.pos.y + 10));
+                break;
               case 3:
                 this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x - 8), Math.floor(this.pos.y + 10));
-                this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y + 15));
-              break;
+                this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x - 8), Math.floor(this.pos.y + 15));
+                break;
               case 4:
                 this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x - 8), Math.floor(this.pos.y + 15));
-                this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y + 20));
-              break;
+                this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x - 8), Math.floor(this.pos.y + 20));
+                break;
               case 5:
-                this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y + 20));
-                this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y + 25));               
-              break;
+                this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x - 8), Math.floor(this.pos.y + 20));
+                this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x - 8), Math.floor(this.pos.y + 25));
+                break;
               case 6:
-                this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y + 25));
-                this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y + 30));
-              break;
+                this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x - 8), Math.floor(this.pos.y + 25));
+                this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x - 8), Math.floor(this.pos.y + 30));
+                break;
               case 7:
-                this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y + 45));
-                this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y + 50));
-              break;
+                this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x - 8), Math.floor(this.pos.y + 45));
+                this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x - 8), Math.floor(this.pos.y + 50));
+                break;
               case 8: case 9: case 10: case 11:
-                this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y + 45));
-                this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y + 50));
-              break;  
+                this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x - 8), Math.floor(this.pos.y + 45));
+                this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x - 8), Math.floor(this.pos.y + 50));
+                break;
             }
           }
-          
+
           if (this.player_climbable_states === "player_in_climbable") {
             this.body.setMaxVelocity(1, 0.70);
             this.body.force.x = 0;
@@ -855,8 +908,8 @@ game.player_entity = me.Entity.extend(
               this.anchorPoint.set(0.5, 0.5);
               this.change_animation("climb_down");
             }
-            this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x -8), Math.floor(this.pos.y - 12));
-            this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y -7));
+            this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x - 8), Math.floor(this.pos.y - 12));
+            this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x - 8), Math.floor(this.pos.y - 7));
           }
           break;
 
@@ -875,7 +928,7 @@ game.player_entity = me.Entity.extend(
             this.change_animation("crawl");
           }
           this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x - 6), Math.floor(this.pos.y - 12));
-          this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x - 6), Math.floor(this.pos.y -7));
+          this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x - 6), Math.floor(this.pos.y - 7));
           break;
 
         /******************************/
@@ -893,7 +946,7 @@ game.player_entity = me.Entity.extend(
             this.change_animation("crawl");
           }
           this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x - 6), Math.floor(this.pos.y - 12));
-          this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x - 6), Math.floor(this.pos.y -7));
+          this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x - 6), Math.floor(this.pos.y - 7));
           break;
 
         /***************************/
@@ -904,8 +957,8 @@ game.player_entity = me.Entity.extend(
             // easy "math" for double jump
             this.body.force.y -= this.body.maxVel.y * this.multipleJump++;
           }
-          this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x -8), Math.floor(this.pos.y - 12));
-          this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x -8 ), Math.floor(this.pos.y -7));
+          this.player_head_health_bar.drawHealthBarPosition(Math.floor(this.pos.x - 8), Math.floor(this.pos.y - 12));
+          this.player_head_mana_bar.drawManaBarPosition(Math.floor(this.pos.x - 8), Math.floor(this.pos.y - 7));
           break;
 
         default:
@@ -923,12 +976,16 @@ game.player_entity = me.Entity.extend(
     hurt: function (hit_points) {
       if (!this.renderable.isFlickering()) {
         this.renderable.flicker(250);
-        this.floating_text = me.pool.pull("generic_floating_text", hit_points, Math.floor(this.pos.x), Math.floor(this.pos.y));
+        //this.floating_text = me.pool.pull("generic_floating_text", hit_points, Math.floor(this.pos.x), Math.floor(this.pos.y));
         this.player_head_health_bar.setPlayerHealthBar(game.data.player_current_health -= hit_points);
         this.player_head_health_bar.updateOnce = true;
-
-        this.player_health_bar.setPlayerHealthBar(game.data.player_current_health);
-        this.player_health_bar.updateOnce = true;
+        this.floating_player_current_sequence.updateGameLogText("player recieves " + hit_points + " damage Time [" + this.floating_game_log_time.retrievGameLogText().toString() + "]");
+        window.setTimeout(() => { 
+                                  this.floating_player_previous_sequence.updateGameLogText(this.floating_player_current_sequence.retrievGameLogText());
+                                  this.floating_player_current_sequence.updateGameLogText("Player current sequence events");
+                                }, 2000);
+        this.player_plaque_health_bar.setPlayerHealthBar(game.data.player_current_health);
+        this.player_plaque_health_bar.updateOnce = true;
         // hurt blood splatter
         this.bloodtrails = me.pool.pull("blood_trails", Math.floor(this.pos.x), Math.floor(this.pos.y));
         this.bloodPosition = me.game.viewport.worldToLocal(Math.floor(this.pos.x), Math.floor(this.pos.y));

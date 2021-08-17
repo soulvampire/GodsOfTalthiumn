@@ -10,15 +10,18 @@ game.stationary_spike_entity = me.Entity.extend(
     /***************/
     init: function(x, y, settings) 
     {
-        this.spike_rotation_speed = settings.spike_rotation_speed;
-        this.spike_hit_points = settings.spike_hit_points;
+       
         settings.image = "platform_spike";
-        settings.shapes = new me.Rect(0, 0, settings.framewidth, settings.frameheigh);
 
         /********************/
         /* call constructor */
         /********************/
         this._super(me.Entity, 'init', [x, y, settings]);
+        
+        this.spike_rotation_speed = settings.spike_rotation_speed;
+        this.spike_hit_points = settings.spike_hit_points;
+
+        settings.shapes = new me.Rect(0, 0, settings.framewidth, settings.frameheigh);
         this.name = 'stationary_spike';
 
         /**************************/
