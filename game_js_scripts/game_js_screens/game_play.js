@@ -6,6 +6,7 @@ game.play_screen = me.Stage.extend({
      */
     onResetEvent: function() 
     {	
+			this.display_time = new Date(Date.now());
 
 			this.is_floating = true;
 			this.non_floating = false;
@@ -16,9 +17,14 @@ game.play_screen = me.Stage.extend({
 			this.highlight_required = true;
 			this.non_highlight_required = false;
 
-			this.screen_width = me.game.viewport.width;
-			this.screen_height = me.game.viewport.height;
+			this.defined_screen_width = me.game.viewport.width;
+			this.defined_screen_height = me.game.viewport.height;
 
+			console.log("true inner width" + window.innerWidth.toString());
+
+			this.screen_ratio = window.innerWidth / this.defined_screen_width;
+
+			console.log("ratio " + this.screen_ratio);
       /*********************/
       /* load castle level */
       /*********************/
@@ -68,8 +74,6 @@ game.play_screen = me.Stage.extend({
 				/***************************/
     		/* end static game display */
     		/***************************/
-		
-				
 
 			/**************************************/
     	/* floating message panel information */
@@ -83,14 +87,16 @@ game.play_screen = me.Stage.extend({
 			/**********************************/
     	/* floating map panel information */
     	/**********************************/
-				this.floating_map_panel = new game.floating_generic_panel(this.screen_width - 110, 5, 105, 126, "map_interface", this.is_floating, this.is_persistent, this.is_moveable);
+				this.floating_map_panel = new game.floating_generic_panel(this.defined_screen_width - 110, 5, 105, 138, "map_interface", this.is_floating, this.is_persistent, this.is_moveable);
 
+				this.floating_map_panel_title = new game.floating_textbox(this.defined_screen_width - 88, 5, 1, 13, "Game Map Panel", 12);
+				me.game.world.addChild(this.floating_map_panel_title, 100);
 			/**********************/
     	/* floating map icons */
     	/*********************/
-				this.floating_map_panel.addChild(new game.generic_button_interface(3, 3, "map_attach", this.non_floating, this.is_persistent));
-				this.floating_map_panel.addChild(new game.generic_button_interface(84, 3, "map_minimize", this.non_floating, this.is_persistent));
-				this.floating_map_panel.addChild(new game.generic_button_interface(3, 105, "map_node_points", this.non_floating, this.is_persistent));
+				this.floating_map_panel.addChild(new game.generic_button_interface(3, 15, "map_attach", this.non_floating, this.is_persistent));
+				this.floating_map_panel.addChild(new game.generic_button_interface(84, 15, "map_minimize", this.non_floating, this.is_persistent));
+				this.floating_map_panel.addChild(new game.generic_button_interface(3, 117, "map_node_points", this.non_floating, this.is_persistent));
 
 				/******************************/
     		/* display floating map panel */
@@ -100,13 +106,6 @@ game.play_screen = me.Stage.extend({
     	/* end */
     	/*******/
     },
-
-		onActivateEvent: function () {
-			me.event.subscribe(me.event.WINDOW_ONRESIZE, function () {
-			this.videoPos = me.video.getPos();
-			console.log("resize");
-			});
-		},
     
     /**************************************************************/
     /*  action to perform when leaving this screen (state change) */

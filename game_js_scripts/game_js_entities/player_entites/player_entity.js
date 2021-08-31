@@ -278,39 +278,37 @@ game.player_entity = me.Entity.extend(
 			this.highlight_required = true;
 			this.non_highlight_required = false;
 
-			this.screen_width = me.game.viewport.width;
-			this.screen_height = me.game.viewport.height;
-
-      this.textarea_canvas_height = $(document).height();
-      this.textarea_canvas_width = $(document).width();
-
-      this.size_factor_height = this.textarea_canvas_height/this.screen_height;
-
-      console.log("size factor" + this.size_factor_height);
-
+      this.defined_screen_width = me.game.viewport.width;
+			this.defined_screen_height = me.game.viewport.height;
+      
       /***************************************/
     	/* floating game log panel information */
     	/***************************************/
-			  this.floating_game_log_panel = new game.floating_generic_panel(7,  (this.screen_height - 62), 171, 56, "game_log_dialog_box_min", this.is_floating, this.is_persistent, this.non_moveable);
+			  this.floating_game_log_panel = new game.floating_generic_panel(7,  this.defined_screen_height - 62, 171, 56, "game_log_dialog_box_min", this.is_floating, this.is_persistent, this.non_moveable);
 
-        this.floating_game_log_title  = new game.floating_textbox(21, (this.screen_height * 1.7) - 87, 1, 14, "Game Log Panel", 12);
-
-        this.floating_player_current_sequence = new game.floating_textbox(26, (this.screen_height * 1.7) - 55, 1, 44, "Player current sequence events", 9)
-        this.floating_player_previous_sequence = new game.floating_textbox(26, (this.screen_height * 1.7) - 17, 1, 50, "Player previous sequence events", 9)
-
-        this.floating_game_log_time = new game.floating_textbox(232, (this.screen_height * 1.7) - 87, 1, 10, (this.display_time.getHours().toString().padStart(2, '0') + ":" 
-                                    + this.display_time.getMinutes().toString().padStart(2, '0') + ":" + this.display_time.getMinutes().toString().padStart(2, '0')).toString(), 12);
-        window.setInterval(() => { 
+      /******************************************/
+			/* floating game log current time display */
+			/******************************************/
+        this.floating_game_log_time = new game.floating_textbox(184, this.defined_screen_height - 62, 1, 10, (this.display_time.getHours().toString().padStart(2, '0') + ":" + this.display_time.getMinutes().toString().padStart(2, '0') + ":" + this.display_time.getMinutes().toString().padStart(2, '0')).toString(), 13);
+      /******************************************/
+      /* floating game log updated time display */
+      /******************************************/
+       window.setInterval(() => { 
                                     this.display_time = new Date(Date.now());
                                     this.floating_game_log_time.updateGameLogText(this.display_time.getHours().toString().padStart(2, '0') + ":" + this.display_time.getMinutes().toString().padStart(2, '0') + ":" + this.display_time.getSeconds().toString().padStart(2, '0'));
                                   },900);	
+      /********************************************/
+      /* floating game log player sequence events */
+      /********************************************/
+        this.floating_player_current_sequence = new game.floating_textbox(15, this.defined_screen_height - 44, 1, 40, "Player current sequence events", 10);
+        this.floating_player_previous_sequence = new game.floating_textbox(13, this.defined_screen_height - 22, 1, 50, "Player previous sequence events", 10);
 	
 			/*********************************************/
 			/* floating game log player text information */
 			/*********************************************/
-      
-
-      
+        this.floating_game_log_panel.addChild(new game.floating_textbox(12, this.defined_screen_height - 62, 1, 13, "Game Log Panel", 12), 100);
+			  this.floating_game_log_panel.addChild(this.floating_player_current_sequence, 100);
+        this.floating_game_log_panel.addChild(this.floating_player_previous_sequence, 100);
 
 			/***********************************/
 			/* display floating game log panel */

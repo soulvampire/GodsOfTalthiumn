@@ -76,4 +76,11 @@ game.resources = [
         /* map tilesets (tsx) */
         /**********************/
         {name: "world01_area01_castle",  type: "tsx", src: "game_data/game_maps/game_world01/map_castle_level/world01_area01_castle.tsx"},
+
+        /***************/
+        /* game fonts  */
+        /***************/
+        {name: "game_arial_font",  type: "image", src: "game_data/game_fonts/arial_font.png"},
+        {name: "game_arial_font",  type: "binary", src: "game_data/game_fonts/arial_font.fnt"},
+
 ];

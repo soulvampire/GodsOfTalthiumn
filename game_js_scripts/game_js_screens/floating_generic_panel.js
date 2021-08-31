@@ -25,13 +25,14 @@ game.floating_generic_panel = me.Container.extend(
         /********************/
         /* panel background */
         /********************/
-
         this.floating_panel_sprite = game.interface_sprites.createSpriteFromName(this.panel_sprite_name + "_normal");
         this.width = this.floating_panel_sprite.width;
         this.height = this.floating_panel_sprite.height;
         this.floating_panel_sprite.anchorPoint.set(0.0, 0.0);
 				this.addChild(this.floating_panel_sprite);
+
         
+
         // input status flags
         this.selected = false;
         this.hover = false;
@@ -69,7 +70,6 @@ game.floating_generic_panel = me.Container.extend(
      */
     pointerMove: function (event) {
       this.hover = this.getBounds().containsPoint(event.gameX, event.gameY);
-      console.log("hover " + this.hover);
 				if(this.isMoveable)
         {
           if (this.selected) 

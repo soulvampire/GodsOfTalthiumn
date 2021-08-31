@@ -23,35 +23,35 @@
       /***********************************/
     	/* spell object display left panel */
     	/***********************************/
-        this.floating_main_interface.addChild(new game.generic_button_interface(93, 32, "spell_object_button", this.non_floating, this.is_persistent));
-        this.floating_main_interface.addChild(new game.generic_button_interface(130, 32, "spell_object_button", this.non_floating, this.is_persistent));
-        this.floating_main_interface.addChild(new game.generic_button_interface(167, 32, "spell_object_button", this.non_floating, this.is_persistent));
-        this.floating_main_interface.addChild(new game.generic_button_interface(204, 32, "spell_object_button", this.non_floating, this.is_persistent));
+        this.floating_main_interface.addChild(new game.generic_button_interface(93, 42, "spell_object_button", this.non_floating, this.is_persistent));
+        this.floating_main_interface.addChild(new game.generic_button_interface(130, 42, "spell_object_button", this.non_floating, this.is_persistent));
+        this.floating_main_interface.addChild(new game.generic_button_interface(167, 42, "spell_object_button", this.non_floating, this.is_persistent));
+        this.floating_main_interface.addChild(new game.generic_button_interface(204, 42, "spell_object_button", this.non_floating, this.is_persistent));
 
       /************************************/
     	/* spell object display right panel */
     	/************************************/
-      this.floating_main_interface.addChild(new game.generic_button_interface(378, 32, "spell_object_button", this.non_floating, this.is_persistent));
-      this.floating_main_interface.addChild(new game.generic_button_interface(415, 32, "spell_object_button", this.non_floating, this.is_persistent));
-      this.floating_main_interface.addChild(new game.generic_button_interface(452, 32, "spell_object_button", this.non_floating, this.is_persistent));
-      this.floating_main_interface.addChild(new game.generic_button_interface(489, 32, "spell_object_button", this.non_floating, this.is_persistent));
+      this.floating_main_interface.addChild(new game.generic_button_interface(378, 42, "spell_object_button", this.non_floating, this.is_persistent));
+      this.floating_main_interface.addChild(new game.generic_button_interface(415, 42, "spell_object_button", this.non_floating, this.is_persistent));
+      this.floating_main_interface.addChild(new game.generic_button_interface(452, 42, "spell_object_button", this.non_floating, this.is_persistent));
+      this.floating_main_interface.addChild(new game.generic_button_interface(489, 42, "spell_object_button", this.non_floating, this.is_persistent));
 
       /********************************/
     	/* spell expand icon left panel */
     	/********************************/
-        this.floating_main_interface.addChild(new game.generic_button_interface(93, 22, "spell_object_expand", this.non_floating, this.is_persistent));
-        this.floating_main_interface.addChild(new game.generic_button_interface(130, 22, "spell_object_expand", this.non_floating, this.is_persistent));
-        this.floating_main_interface.addChild(new game.generic_button_interface(167, 22, "spell_object_expand", this.non_floating, this.is_persistent));
-        this.floating_main_interface.addChild(new game.generic_button_interface(204, 22, "spell_object_expand", this.non_floating, this.is_persistent));
+        this.floating_main_interface.addChild(new game.generic_button_interface(93, 32, "spell_object_expand", this.non_floating, this.is_persistent));
+        this.floating_main_interface.addChild(new game.generic_button_interface(130, 32, "spell_object_expand", this.non_floating, this.is_persistent));
+        this.floating_main_interface.addChild(new game.generic_button_interface(167, 32, "spell_object_expand", this.non_floating, this.is_persistent));
+        this.floating_main_interface.addChild(new game.generic_button_interface(204, 32, "spell_object_expand", this.non_floating, this.is_persistent));
 
 
       /************************************/
     	/* spell infomation icon left panel */
     	/************************************/
-        this.floating_main_interface.addChild(new game.generic_button_interface(116, 60, "spell_object_information", this.non_floating, this.is_persistent));
-        this.floating_main_interface.addChild(new game.generic_button_interface(155, 60, "spell_object_information", this.non_floating, this.is_persistent));
-        this.floating_main_interface.addChild(new game.generic_button_interface(190, 60, "spell_object_information", this.non_floating, this.is_persistent));
-        this.floating_main_interface.addChild(new game.generic_button_interface(227, 60, "spell_object_information", this.non_floating, this.is_persistent));
+        this.floating_main_interface.addChild(new game.generic_button_interface(116, 70, "spell_object_information", this.non_floating, this.is_persistent));
+        this.floating_main_interface.addChild(new game.generic_button_interface(155, 70, "spell_object_information", this.non_floating, this.is_persistent));
+        this.floating_main_interface.addChild(new game.generic_button_interface(190, 70, "spell_object_information", this.non_floating, this.is_persistent));
+        this.floating_main_interface.addChild(new game.generic_button_interface(227, 70, "spell_object_information", this.non_floating, this.is_persistent));
 
       me.game.world.addChild(this.floating_main_interface, 99)
    },
