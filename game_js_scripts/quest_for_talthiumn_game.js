@@ -68,7 +68,7 @@ var game =
   onload: function () 
   {
     // Initialize the video.
-    if (!me.video.init(800, 600, {wrapper : "screen", scale : "auto", scaleMethod : "flex-width", renderer : me.video.AUTO, subPixel : false, antiAlias : true})) 
+    if (!me.video.init(800, 600, {parent : "screen", scale : "auto", scaleMethod : "flex-width", renderer : me.video.AUTO, subPixel : false, antiAlias : true})) 
     {
       return;
     }
@@ -99,7 +99,7 @@ var game =
     /*********************************/
       me.pool.register("player_dust_trails", game.dust_trail, true);
       me.pool.register("impact_dust_trails", game.impact_dust_trail, true);
-      me.pool.register("generic_floating_text", game.generic_floating_text_entity, true);
+     // me.pool.register("generic_floating_text", game.generic_floating_text_entity, true);
 
     /*********************************/
     /* player entity damage object */

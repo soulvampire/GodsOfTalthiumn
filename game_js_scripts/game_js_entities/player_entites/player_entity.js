@@ -284,12 +284,12 @@ game.player_entity = me.Entity.extend(
       /***************************************/
     	/* floating game log panel information */
     	/***************************************/
-			  this.floating_game_log_panel = new game.floating_generic_panel(7,  this.defined_screen_height - 62, 171, 56, "game_log_dialog_box_min", this.is_floating, this.is_persistent, this.non_moveable);
+			  this.floating_game_log_panel = new game.generic_floating_panel(7,  this.defined_screen_height - 62, 171, 56, "game_log_dialog_box_min", this.is_floating, this.is_persistent, this.non_moveable);
 
       /******************************************/
 			/* floating game log current time display */
 			/******************************************/
-        this.floating_game_log_time = new game.floating_textbox(184, this.defined_screen_height - 62, 1, 10, (this.display_time.getHours().toString().padStart(2, '0') + ":" + this.display_time.getMinutes().toString().padStart(2, '0') + ":" + this.display_time.getMinutes().toString().padStart(2, '0')).toString(), 13);
+        this.floating_game_log_time = new game.generic_floating_textbox(184, this.defined_screen_height - 62, 1, 10, (this.display_time.getHours().toString().padStart(2, '0') + ":" + this.display_time.getMinutes().toString().padStart(2, '0') + ":" + this.display_time.getMinutes().toString().padStart(2, '0')).toString(), 13);
       /******************************************/
       /* floating game log updated time display */
       /******************************************/
@@ -300,13 +300,13 @@ game.player_entity = me.Entity.extend(
       /********************************************/
       /* floating game log player sequence events */
       /********************************************/
-        this.floating_player_current_sequence = new game.floating_textbox(15, this.defined_screen_height - 44, 1, 40, "Player current sequence events", 10);
-        this.floating_player_previous_sequence = new game.floating_textbox(13, this.defined_screen_height - 22, 1, 50, "Player previous sequence events", 10);
+        this.floating_player_current_sequence = new game.generic_floating_textbox(15, this.defined_screen_height - 44, 1, 40, "Player current sequence events", 10);
+        this.floating_player_previous_sequence = new game.generic_floating_textbox(13, this.defined_screen_height - 22, 1, 50, "Player previous sequence events", 10);
 	
 			/*********************************************/
 			/* floating game log player text information */
 			/*********************************************/
-        this.floating_game_log_panel.addChild(new game.floating_textbox(12, this.defined_screen_height - 62, 1, 13, "Game Log Panel", 12), 100);
+        this.floating_game_log_panel.addChild(new game.generic_floating_textbox(12, this.defined_screen_height - 62, 1, 13, "Game Log Panel", 12), 100);
 			  this.floating_game_log_panel.addChild(this.floating_player_current_sequence, 100);
         this.floating_game_log_panel.addChild(this.floating_player_previous_sequence, 100);
 

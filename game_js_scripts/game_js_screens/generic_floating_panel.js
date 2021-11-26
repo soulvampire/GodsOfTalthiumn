@@ -1,6 +1,6 @@
 game = game || {};
 
-game.floating_generic_panel = me.Container.extend( 
+game.generic_floating_panel = me.Container.extend( 
   {
 		init: function (panel_posX, panel_posY, panel_width, panel_height, panel_image_name, is_floating, is_persistent, is_moveable) {
 
@@ -26,12 +26,10 @@ game.floating_generic_panel = me.Container.extend(
         /* panel background */
         /********************/
         this.floating_panel_sprite = game.interface_sprites.createSpriteFromName(this.panel_sprite_name + "_normal");
-        this.width = this.floating_panel_sprite.width;
-        this.height = this.floating_panel_sprite.height;
-        this.floating_panel_sprite.anchorPoint.set(0.0, 0.0);
-				this.addChild(this.floating_panel_sprite);
 
-        
+        this.floating_panel_sprite.anchorPoint.set(0.0, 0.0);
+
+				this.addChild(this.floating_panel_sprite);
 
         // input status flags
         this.selected = false;
@@ -59,7 +57,6 @@ game.floating_generic_panel = me.Container.extend(
         me.input.releasePointerEvent("pointerdown", this);
         me.input.releasePointerEvent("pointerup", this);
         me.input.releasePointerEvent("pointercancel", this);
-        me.input.releasePointerEvent("pointerover", this);
 
         // call the parent function
         this._super(me.Container, "onDeactivateEvent");
@@ -77,8 +74,10 @@ game.floating_generic_panel = me.Container.extend(
             // follow the pointer
               this.pos.set(event.gameX, event.gameY, this.pos.z);
               this.pos.sub(this.grabOffset);
-              this.updateChildBounds();
+              //this.updateChildBounds();
           }
+          // mark the container for redraw
+          this.isDirty = true;
         }
     },
 
@@ -91,6 +90,14 @@ game.floating_generic_panel = me.Container.extend(
           // don"t propagate the event furthermore
           return false;
         }
+    },
+
+    floatingGenericPanelPositionX: function () {
+      return this.pos.x;
+    },
+
+    floatingGenericPanelPositionY: function () {
+      return this.pos.y;
     },
 
     // mouse up function

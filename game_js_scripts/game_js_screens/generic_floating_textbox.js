@@ -1,6 +1,6 @@
 game = game || {};
 
-game.floating_textbox = me.Renderable.extend(
+game.generic_floating_textbox = me.Renderable.extend(
 	{
 		init: function (floating_text_posX, floating_text_posY, floating_text_box_width, floating_text_box_height, floating_text_field, floating_text_size) {
 			this._super(me.Renderable, "init", [0, 0, floating_text_box_width, floating_text_box_height]);
