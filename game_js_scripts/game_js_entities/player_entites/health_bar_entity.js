@@ -1,13 +1,24 @@
-game = game || {};
-
-game.generic_health_bar_entity = me.Renderable.extend(
-  {
-    init: function (hitPoints, maxHitPoints, hp_pos_x, hp_pos_y, health_bar_width, health_bar_height) {
+var game = game || {};
+/******************************************/
+/* class name : generic_health_bar_entity */
+/******************************************/
+game.generic_health_bar_entity = me.Renderable.extend( {
+  /*********************************************/
+	/*       health bar entity constructor       */
+	/*********************************************/
+	/* hitPoints = damage value                  */
+	/* max_health_points = max health points     */
+	/* hp_pos_x = x value screen position(px)    */
+	/* hp_pos_y = y value screen position(px)    */
+	/* health_bar_width = health bar width(px)   */
+  /* health_bar_height = health bar height(px) */
+	/*********************************************/
+    init: function (hit_points, max_health_points, hp_pos_x, hp_pos_y, health_bar_width, health_bar_height) {
       this._super(me.Renderable, "init", [hp_pos_x, hp_pos_y, health_bar_width, health_bar_height]);
       this.name = "generic_health_bar";
       this.anchorPoint.set(0.0, 0.0);
-      this.hitPoints = hitPoints;
-      this.maxHitPoints = maxHitPoints;
+      this.hitPoints = hit_points;
+      this.max_health_points = max_health_points;
       this.health = 1;
       this.currentHealth = 1;
       this.setPlayerHealthBar(this.hitPoints);
@@ -48,8 +59,8 @@ game.generic_health_bar_entity = me.Renderable.extend(
       return true;
     },
 
-    setPlayerHealthBar: function (hitPoints) {
-      this.currentHealth = hitPoints / this.maxHitPoints;
+    setPlayerHealthBar: function (hit_points) {
+      this.currentHealth = hit_points / this.max_health_points;
     },
 
     setCurrentAnimation: function () {

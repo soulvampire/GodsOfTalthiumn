@@ -2,23 +2,23 @@
 
 {
 	"filename": "game_log_dialog_box_max_normal",
-	"frame": {"x":0,"y":0,"w":171,"h":123},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":171,"h":123},
-	"sourceSize": {"w":171,"h":123}
-},
-{
-	"filename": "game_log_dialog_box_min_normal",
-	"frame": {"x":171,"y":0,"w":221,"h":56},
+	"frame": {"x":0,"y":38,"w":221,"h":56},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":221,"h":56},
 	"sourceSize": {"w":221,"h":56}
 },
 {
+	"filename": "game_log_dialog_box_min_normal",
+	"frame": {"x":670,"y":0,"w":221,"h":36},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":221,"h":36},
+	"sourceSize": {"w":221,"h":36}
+},
+{
 	"filename": "main_interface_normal",
-	"frame": {"x":392,"y":0,"w":617,"h":109},
+	"frame": {"x":0,"y":182,"w":617,"h":109},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":617,"h":109},
@@ -26,7 +26,7 @@
 },
 {
 	"filename": "map_attach_highlight",
-	"frame": {"x":0,"y":123,"w":18,"h":18},
+	"frame": {"x":96,"y":0,"w":18,"h":18},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":18,"h":18},
@@ -34,7 +34,7 @@
 },
 {
 	"filename": "map_attach_normal",
-	"frame": {"x":18,"y":123,"w":18,"h":18},
+	"frame": {"x":114,"y":0,"w":18,"h":18},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":18,"h":18},
@@ -42,15 +42,31 @@
 },
 {
 	"filename": "map_attach_pressed",
-	"frame": {"x":36,"y":123,"w":18,"h":18},
+	"frame": {"x":132,"y":0,"w":18,"h":18},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":18,"h":18},
 	"sourceSize": {"w":18,"h":18}
 },
 {
+	"filename": "map_interface_background_highlight",
+	"frame": {"x":431,"y":38,"w":111,"h":144},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":111,"h":144},
+	"sourceSize": {"w":111,"h":144}
+},
+{
+	"filename": "map_interface_background_normal",
+	"frame": {"x":542,"y":38,"w":111,"h":144},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":111,"h":144},
+	"sourceSize": {"w":111,"h":144}
+},
+{
 	"filename": "map_interface_highlight",
-	"frame": {"x":54,"y":123,"w":105,"h":138},
+	"frame": {"x":221,"y":38,"w":105,"h":138},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":105,"h":138},
@@ -58,7 +74,7 @@
 },
 {
 	"filename": "map_interface_normal",
-	"frame": {"x":159,"y":123,"w":105,"h":138},
+	"frame": {"x":326,"y":38,"w":105,"h":138},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":105,"h":138},
@@ -66,7 +82,7 @@
 },
 {
 	"filename": "map_minimize_highlight",
-	"frame": {"x":264,"y":123,"w":18,"h":18},
+	"frame": {"x":150,"y":0,"w":18,"h":18},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":18,"h":18},
@@ -74,7 +90,7 @@
 },
 {
 	"filename": "map_minimize_normal",
-	"frame": {"x":282,"y":123,"w":18,"h":18},
+	"frame": {"x":168,"y":0,"w":18,"h":18},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":18,"h":18},
@@ -82,7 +98,7 @@
 },
 {
 	"filename": "map_minimize_pressed",
-	"frame": {"x":300,"y":123,"w":18,"h":18},
+	"frame": {"x":186,"y":0,"w":18,"h":18},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":18,"h":18},
@@ -90,7 +106,7 @@
 },
 {
 	"filename": "map_node_points_highlight",
-	"frame": {"x":318,"y":123,"w":18,"h":18},
+	"frame": {"x":204,"y":0,"w":18,"h":18},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":18,"h":18},
@@ -98,7 +114,7 @@
 },
 {
 	"filename": "map_node_points_normal",
-	"frame": {"x":336,"y":123,"w":18,"h":18},
+	"frame": {"x":222,"y":0,"w":18,"h":18},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":18,"h":18},
@@ -106,7 +122,7 @@
 },
 {
 	"filename": "map_node_points_pressed",
-	"frame": {"x":354,"y":123,"w":18,"h":18},
+	"frame": {"x":240,"y":0,"w":18,"h":18},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":18,"h":18},
@@ -114,23 +130,23 @@
 },
 {
 	"filename": "message_dialog_box_max_normal",
-	"frame": {"x":372,"y":123,"w":171,"h":100},
+	"frame": {"x":653,"y":38,"w":171,"h":123},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":171,"h":100},
-	"sourceSize": {"w":171,"h":100}
+	"spriteSourceSize": {"x":0,"y":0,"w":171,"h":123},
+	"sourceSize": {"w":171,"h":123}
 },
 {
 	"filename": "message_dialog_box_min_normal",
-	"frame": {"x":543,"y":123,"w":171,"h":32},
+	"frame": {"x":499,"y":0,"w":171,"h":36},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":171,"h":32},
-	"sourceSize": {"w":171,"h":32}
+	"spriteSourceSize": {"x":0,"y":0,"w":171,"h":36},
+	"sourceSize": {"w":171,"h":36}
 },
 {
 	"filename": "player_mana_health_bar_normal",
-	"frame": {"x":714,"y":123,"w":101,"h":38},
+	"frame": {"x":398,"y":0,"w":101,"h":38},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":101,"h":38},
@@ -138,7 +154,7 @@
 },
 {
 	"filename": "player_plaque_normal",
-	"frame": {"x":815,"y":123,"w":35,"h":33},
+	"frame": {"x":258,"y":0,"w":35,"h":33},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":35,"h":33},
@@ -146,7 +162,7 @@
 },
 {
 	"filename": "spell_object_button_highlight",
-	"frame": {"x":850,"y":123,"w":35,"h":33},
+	"frame": {"x":293,"y":0,"w":35,"h":33},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":35,"h":33},
@@ -154,7 +170,7 @@
 },
 {
 	"filename": "spell_object_button_normal",
-	"frame": {"x":885,"y":123,"w":35,"h":33},
+	"frame": {"x":328,"y":0,"w":35,"h":33},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":35,"h":33},
@@ -162,7 +178,7 @@
 },
 {
 	"filename": "spell_object_button_pressed",
-	"frame": {"x":920,"y":123,"w":35,"h":33},
+	"frame": {"x":363,"y":0,"w":35,"h":33},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":35,"h":33},
@@ -170,59 +186,59 @@
 },
 {
 	"filename": "spell_object_expand_highlight",
-	"frame": {"x":955,"y":123,"w":12,"h":12},
+	"frame": {"x":0,"y":0,"w":16,"h":16},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":12,"h":12},
-	"sourceSize": {"w":12,"h":12}
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+	"sourceSize": {"w":16,"h":16}
 },
 {
 	"filename": "spell_object_expand_normal",
-	"frame": {"x":967,"y":123,"w":12,"h":12},
+	"frame": {"x":16,"y":0,"w":16,"h":16},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":12,"h":12},
-	"sourceSize": {"w":12,"h":12}
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+	"sourceSize": {"w":16,"h":16}
 },
 {
 	"filename": "spell_object_expand_pressed",
-	"frame": {"x":979,"y":123,"w":12,"h":12},
+	"frame": {"x":32,"y":0,"w":16,"h":16},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":12,"h":12},
-	"sourceSize": {"w":12,"h":12}
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+	"sourceSize": {"w":16,"h":16}
 },
 {
 	"filename": "spell_object_information_highlight",
-	"frame": {"x":991,"y":123,"w":12,"h":12},
+	"frame": {"x":48,"y":0,"w":16,"h":16},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":12,"h":12},
-	"sourceSize": {"w":12,"h":12}
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+	"sourceSize": {"w":16,"h":16}
 },
 {
 	"filename": "spell_object_information_normal",
-	"frame": {"x":0,"y":261,"w":12,"h":12},
+	"frame": {"x":64,"y":0,"w":16,"h":16},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":12,"h":12},
-	"sourceSize": {"w":12,"h":12}
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+	"sourceSize": {"w":16,"h":16}
 },
 {
 	"filename": "spell_object_information_pressed",
-	"frame": {"x":12,"y":261,"w":12,"h":12},
+	"frame": {"x":80,"y":0,"w":16,"h":16},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":12,"h":12},
-	"sourceSize": {"w":12,"h":12}
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+	"sourceSize": {"w":16,"h":16}
 }],
 "meta": {
 	"app": "https://www.codeandweb.com/texturepacker",
 	"version": "1.0",
 	"image": "main_game_interface.png",
 	"format": "RGBA8888",
-	"size": {"w":1009,"h":273},
+	"size": {"w":891,"h":291},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:44dadd1ff82412dd7c58f0c62017f53f:990dc683ff7173a208e25137f3daadd9:221c3d0235bfd927b6e51d401cd07b41$"
+	"smartupdate": "$TexturePacker:SmartUpdate:f083071afcd688b6cb9031d90a449d32:f39a397818a630670880701f9375d8b4:221c3d0235bfd927b6e51d401cd07b41$"
 }
 }

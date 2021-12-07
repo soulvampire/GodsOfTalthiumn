@@ -1,13 +1,24 @@
-game = game || {};
-
-game.generic_mana_bar_entity = me.Renderable.extend(
-	{
-		init: function (hitPoints, maxHitPoints, hp_pos_x, hp_pos_y, mana_bar_width, mana_bar_height) {
+var game = game || {};
+/****************************************/
+/* class name : generic_mana_bar_entity */
+/****************************************/
+game.generic_mana_bar_entity = me.Renderable.extend( {
+	/*******************************************/
+	/*       health bar entity constructor     */
+	/*******************************************/
+	/* hitPoints = damage value                */
+	/* max_mana_points = max mana points       */
+	/* hp_pos_x = x value screen position(px)  */
+	/* hp_pos_y = y value screen position(px)  */
+	/* mana_bar_width = health bar width(px)   */
+  /* mana_bar_height = health bar height(px) */
+	/*******************************************/
+		init: function (hitPoints, max_mana_points, hp_pos_x, hp_pos_y, mana_bar_width, mana_bar_height) {
 			this._super(me.Renderable, "init", [hp_pos_x, hp_pos_y, mana_bar_width, mana_bar_height]);
 			this.name = "gereric_mana_bar";
 			this.anchorPoint.set(0.0, 0.0);
 			this.hitPoints = hitPoints;
-			this.maxHitPoints = maxHitPoints;
+			this.max_mana_points = max_mana_points;
 			this.mana = 1;
 			this.currentmana = 1;
 			this.setPlayerManaBar(this.hitPoints);
@@ -45,8 +56,8 @@ game.generic_mana_bar_entity = me.Renderable.extend(
 			return true;
 		},
 
-		setPlayerManaBar: function (hitPoints) {
-			this.currentmana = hitPoints / this.maxHitPoints;
+		setPlayerManaBar: function (hit_points) {
+			this.currentmana = hit_points / this.max_mana_points;
 		},
 
 		setCurrentAnimation: function () {

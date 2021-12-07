@@ -1,27 +1,45 @@
-game = game || {};
+var game = game || {};
 
-game.generic_floating_panel = me.Container.extend( 
-  {
-		init: function (panel_posX, panel_posY, panel_width, panel_height, panel_image_name, is_floating, is_persistent, is_moveable) {
+/***************************************/
+/* class name : generic_floating_panel */
+/***************************************/
+game.generic_floating_panel_interface = me.Container.extend( {
+    /******************************************/
+    /*           panel constructor            */
+    /******************************************/
+    /* panel_posX = X cordinate               */
+    /* panel_posY = Y cordinate               */
+    /* panel_width = width of panel(px)       */
+    /* panel_height = height of panel(px)     */
+    /* panel_image_name = resource name image */
+    /* is_panel_floating = true or flase      */
+    /* is_panel_persistent = true or false    */
+    /******************************************/
+		init: function (panel_name, panel_posX, panel_posY, panel_width, panel_height, panel_image_name, is_panel_floating, is_panel_persistent, is_panel_moveable) {
 
         // call the constructor
         this._super(me.Container, "init", [panel_posX, panel_posY, panel_width, panel_height]);
         
         this.anchorPoint.set(0.0, 0.0);
 
-        // persistent across level change
-        this.isPersistent = is_persistent;
-
-				this.isMoveable = is_moveable;
-				
-        // use screen coordinates
-        this.floating = is_floating;
-
-        this.name = "floating_UI_Panel";
-      
         // give a name
         this.panel_sprite_name = panel_image_name;
 
+        // persistent across level change
+        this.isPersistent = is_panel_persistent;
+
+				this.isMoveable = is_panel_moveable;
+
+        this.isKinematic = false;
+				
+        // use screen coordinates
+        this.floating = is_panel_floating;
+        
+        if (panel_name == null)
+          this.name = "floating_generic_panel";
+        else
+          this.name = panel_name;
+      
         /********************/
         /* panel background */
         /********************/
@@ -67,6 +85,7 @@ game.generic_floating_panel = me.Container.extend(
      */
     pointerMove: function (event) {
       this.hover = this.getBounds().containsPoint(event.gameX, event.gameY);
+      console.log("panel name " + this.name.toString())
 				if(this.isMoveable)
         {
           if (this.selected) 
@@ -74,7 +93,7 @@ game.generic_floating_panel = me.Container.extend(
             // follow the pointer
               this.pos.set(event.gameX, event.gameY, this.pos.z);
               this.pos.sub(this.grabOffset);
-              //this.updateChildBounds();
+              this.updateChildBounds();
           }
           // mark the container for redraw
           this.isDirty = true;
@@ -107,11 +126,6 @@ game.generic_floating_panel = me.Container.extend(
 
     // update function
     update : function(dt) {
-        this._super(me.Container, "update", [ dt ]);
-        return true;
-    },
-
-    draw: function(renderer) {
-        this._super(me.Container, "draw", [ renderer ]);
+      return this._super(me.Container, "update", [ dt ]) || this.hover;
     }
 });

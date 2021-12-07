@@ -1,7 +1,9 @@
+var game = game || {};
+
 /*********************/
 /* game namespace    */
 /*********************/ 
-var game = 
+game = 
 {
   /**********************************************/
   /* data object where to store key information */
@@ -61,7 +63,7 @@ var game =
   collectObjects() 
   {
     game.game_keys = me.game.world.getChildByProp("name", "game_key");
-    //game.castle_level_doors = me.game.world.getChildByProp("name", "castle_level_door");
+    game.castle_level_doors = me.game.world.getChildByProp("name", "castle_level_door");
   },
    
   // Run on page load.
@@ -89,10 +91,11 @@ var game =
 
     /*************************/
     /* player entity objects */
-    /*************************/ 
+    /*************************/
       me.pool.register("main_player", game.player_entity, false);
       me.pool.register("player_head_health_bar", game.generic_health_bar_entity, false);
       me.pool.register("player_head_mana_bar", game.generic_mana_bar_entity, false);
+
 
     /*********************************/
     /* player entity effects objects */

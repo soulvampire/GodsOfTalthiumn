@@ -1,7 +1,19 @@
-game = game || {};
-
+var game = game || {};
+/*****************************************/
+/* class name : generic_floating_textbox */
+/*****************************************/
 game.generic_floating_textbox = me.Renderable.extend(
 	{
+		/*********************************************************/
+		/*          generic floating textbox constructor         */
+		/*********************************************************/
+		/* floating_text_posX = x value screen position(px)      */
+		/* floating_text_posY = y value screen position(px)      */
+		/* floating_text_box_width = text box width value(px)    */
+		/* floating_text_box_height = text box height value(px)  */
+		/* floating_text_field = text field string               */
+		/* mana_bar_height = text field size(pt)                 */
+		/*********************************************************/
 		init: function (floating_text_posX, floating_text_posY, floating_text_box_width, floating_text_box_height, floating_text_field, floating_text_size) {
 			this._super(me.Renderable, "init", [0, 0, floating_text_box_width, floating_text_box_height]);
 

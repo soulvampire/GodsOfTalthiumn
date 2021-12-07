@@ -1,4 +1,4 @@
-game = game || {};
+var game = game || {};
 
 game.title_screen = me.Stage.extend({
     /**

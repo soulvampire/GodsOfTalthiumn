@@ -18,80 +18,82 @@
 	<body>
 		<!-- game screen canvas placeholder -->
 			<div id="screen"></div>
+			<!-- end canvas placeholder -->
 			<div id="screen textarea"></div>
-    <!-- end canvas placeholder -->
-        
-		<!-- melonJS Library -->
-      	<script type = "text/javascript" src="game_js_library/melonjs_version_v8/melonjs.js"></script>
+			<!-- end textarea placeholder -->
+    
+			<!-- melonJS Library -->
+					<script type = "text/javascript" src="game_js_library/melonjs_version_8/melonjs.js"></script>
 
-		<!-- jQuery Library -->
-      <script type = "text/javascript" src="game_js_library/jquery/jquery_slim.js"></script>
+			<!-- jQuery Library -->
+				<script type = "text/javascript" src="game_js_library/jquery/jquery_slim.js"></script>
 
-		<!-- Plugin(s) -->
-			<script type = "text/javascript" src="game_js_library/game_js_plugins/game_js_debug_v8/debugPanel.js"></script>
+			<!-- Plugin(s) -->
+				<script type = "text/javascript" src="game_js_library/game_js_plugins/game_js_debug_8/debugPanel.js"></script>
 
-		<!-- game scripts -->
-			<!-- game start script -->
-				<script type = "text/javascript" src="game_js_scripts/quest_for_talthiumn_game.js"></script>
+			<!-- game scripts -->
+				<!-- game start script -->
+					<script type = "text/javascript" src="game_js_scripts/quest_for_talthiumn_game.js"></script>
 
-			<!-- game resource script -->
-				<script type = "text/javascript" src="game_js_scripts/game_resources.js"></script>
+				<!-- game resource script -->
+					<script type = "text/javascript" src="game_js_scripts/game_resources.js"></script>
 
-			<!-- game on screen display script -->
-				<script type = "text/javascript" src="game_js_scripts/game_js_screens/main_game_interface.js"></script>
-				<script type = "text/javascript" src="game_js_scripts/game_js_screens/generic_button_interface.js"></script>
-				<script type = "text/javascript" src="game_js_scripts/game_js_screens/generic_floating_textbox.js"></script>
-				<script type = "text/javascript" src="game_js_scripts/game_js_screens/generic_floating_panel.js"></script>
+				<!-- game on screen display script -->
+					<script type = "text/javascript" src="game_js_scripts/game_js_screens/main_game_interface.js"></script>
+					<script type = "text/javascript" src="game_js_scripts/game_js_screens/generic_floating_button_interface.js"></script>
+					<script type = "text/javascript" src="game_js_scripts/game_js_screens/generic_floating_textbox.js"></script>
+					<script type = "text/javascript" src="game_js_scripts/game_js_screens/generic_floating_panel_interface.js"></script>
 
-			<!-- game dialog window script -->
-			<!--	<script type="text/javascript" src="game_js_scripts/dialog_window.js"></script> -->
+				<!-- game dialog window script -->
+				<!--	<script type="text/javascript" src="game_js_scripts/dialog_window.js"></script> -->
 
-			<!-- game utilities for dynamic lights-->
-			<script type = "text/javascript" src = "game_js_scripts/game_js_utilities/illuminated_light_entity.js"></script>
-			
-			<!-- player scripts -->
-				<script type = "text/javascript" src = "game_js_scripts/game_js_entities/player_entites/player_entity.js"></script>
-				<script type = "text/javascript" src = "game_js_scripts/game_js_entities/player_entites/health_bar_entity.js"></script>
-				<script type = "text/javascript" src = "game_js_scripts/game_js_entities/player_entites/mana_bar_entity.js"></script>
-				<script type = "text/javascript" src = "game_js_scripts/game_js_entities/player_entites/dust_trail.js"></script>
-				<script type = "text/javascript" src = "game_js_scripts/game_js_entities/player_entites/impact_dust_trail.js"></script>
-				<script type = "text/javascript" src = "game_js_scripts/game_js_entities/player_entites/blood_trail.js"></script>
-
-			<!-- player damage text script -->
-			<script type = "text/javascript" src="game_js_scripts/game_js_entities/generic_floating_text_entity.js"></script>
-
-			<!-- platform hazards script -->
-				<script type = "text/javascript" src = "game_js_scripts/game_js_entities/platform_entites/stationary_spike_entity.js"></script>
-				<script type = "text/javascript" src = "game_js_scripts/game_js_entities/platform_entites/flame_torch_entity.js"></script>
-				<script type = "text/javascript" src = "game_js_scripts/game_js_entities/platform_entites/explosive_trap_entity.js"></script>
-				<script type = "text/javascript" src = "game_js_scripts/game_js_entities/physical_entities/cannon_entity.js"></script>
-				<script type = "text/javascript" src = "game_js_scripts/game_js_entities/platform_entites/platform_ladder_entity.js"></script>
-				<script type = "text/javascript" src = "game_js_scripts/game_js_entities/platform_entites/platform_chain_entity.js"></script> 
+				<!-- game utilities for dynamic lights-->
+				<script type = "text/javascript" src = "game_js_scripts/game_js_utilities/illuminated_light_entity.js"></script>
 				
-			<!-- platform script -->
-				<script type = "text/javascript" src="game_js_scripts/game_js_entities/platform_entites/moving_platforms_entity.js"></script>
-				<script type = "text/javascript" src="game_js_scripts/game_js_entities/platform_entites/vanishing_platform_entity.js"></script>
+				<!-- player scripts -->
+					<script type = "text/javascript" src = "game_js_scripts/game_js_entities/player_entites/player_entity.js"></script>
+					<script type = "text/javascript" src = "game_js_scripts/game_js_entities/player_entites/health_bar_entity.js"></script>
+					<script type = "text/javascript" src = "game_js_scripts/game_js_entities/player_entites/mana_bar_entity.js"></script>
+					<script type = "text/javascript" src = "game_js_scripts/game_js_entities/player_entites/dust_trail.js"></script>
+					<script type = "text/javascript" src = "game_js_scripts/game_js_entities/player_entites/impact_dust_trail.js"></script>
+					<script type = "text/javascript" src = "game_js_scripts/game_js_entities/player_entites/blood_trail.js"></script>
+
+				<!-- player damage text script -->
+				<script type = "text/javascript" src="game_js_scripts/game_js_entities/generic_floating_text_entity.js"></script>
+
+				<!-- platform hazards script -->
+					<script type = "text/javascript" src = "game_js_scripts/game_js_entities/platform_entites/stationary_spike_entity.js"></script>
+					<script type = "text/javascript" src = "game_js_scripts/game_js_entities/platform_entites/flame_torch_entity.js"></script>
+					<script type = "text/javascript" src = "game_js_scripts/game_js_entities/platform_entites/explosive_trap_entity.js"></script>
+					<script type = "text/javascript" src = "game_js_scripts/game_js_entities/physical_entities/cannon_entity.js"></script>
+					<script type = "text/javascript" src = "game_js_scripts/game_js_entities/platform_entites/platform_ladder_entity.js"></script>
+					<script type = "text/javascript" src = "game_js_scripts/game_js_entities/platform_entites/platform_chain_entity.js"></script> 
+					
+				<!-- platform script -->
+					<script type = "text/javascript" src="game_js_scripts/game_js_entities/platform_entites/moving_platforms_entity.js"></script>
+					<script type = "text/javascript" src="game_js_scripts/game_js_entities/platform_entites/vanishing_platform_entity.js"></script>
+					
+				<!-- item chests scripts -->
+					<script type = "text/javascript" src="game_js_scripts/game_js_entities/physical_entities/chest_entity.js"></script>
+
+				<!-- game key script -->
+				<script type = "text/javascript" src="game_js_scripts/game_js_entities/physical_entities/game_key_entity.js"></script>
+
+				<!-- game explosion script -->
+				<script type = "text/javascript" src="game_js_scripts/game_js_entities/generic_explosion_entity.js"></script>
+
+				<!-- door scripts -->
+					<script type = "text/javascript" src="game_js_scripts/game_js_entities/physical_entities/door_entity.js"></script>
+					<script type = "text/javascript" src="game_js_scripts/game_js_entities/physical_entities/door_lock_entity.js"></script>
 				
-			<!-- item chests scripts -->
-				<script type = "text/javascript" src="game_js_scripts/game_js_entities/physical_entities/chest_entity.js"></script>
+				<!-- enemy scripts -->
+					<script type = "text/javascript" src="game_js_scripts/game_js_entities/enemy_entities/enemies_spawn_trigger_entity.js"></script>
+					<script type = "text/javascript" src="game_js_scripts/game_js_entities/enemy_entities/enemy_spawn_manager_entity.js"></script>
+				
+				<script type = "text/javascript" src="game_js_scripts/game_js_screens/game_title.js"></script>
+				<script type = "text/javascript" src="game_js_scripts/game_js_screens/game_play.js"></script>
+				<!-- end game scripts -->
 
-			<!-- game key script -->
-			<script type = "text/javascript" src="game_js_scripts/game_js_entities/physical_entities/game_key_entity.js"></script>
-
-			<!-- game explosion script -->
-			<script type = "text/javascript" src="game_js_scripts/game_js_entities/generic_explosion_entity.js"></script>
-
-			<!-- door scripts -->
-				<script type = "text/javascript" src="game_js_scripts/game_js_entities/physical_entities/door_entity.js"></script>
-				<script type = "text/javascript" src="game_js_scripts/game_js_entities/physical_entities/door_lock_entity.js"></script>
-			
-			<!-- enemy scripts -->
-				<script type = "text/javascript" src="game_js_scripts/game_js_entities/enemy_entities/enemies_spawn_trigger_entity.js"></script>
-				<script type = "text/javascript" src="game_js_scripts/game_js_entities/enemy_entities/enemy_spawn_manager_entity.js"></script>
-			
-			<script type = "text/javascript" src="game_js_scripts/game_js_screens/game_title.js"></script>
-			<script type = "text/javascript" src="game_js_scripts/game_js_screens/game_play.js"></script>
-		<!-- end game scripts -->
 
 		<!-- Bootstrap & Mobile optimization tricks -->
 		<script type="text/javascript">

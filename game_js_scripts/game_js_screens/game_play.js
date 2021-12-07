@@ -1,4 +1,4 @@
-game = game || {};
+var game = game || {};
 
 game.play_screen = me.Stage.extend({
     /**
@@ -14,8 +14,6 @@ game.play_screen = me.Stage.extend({
 			this.non_persistent = false;
       this.is_moveable = true;
 			this.is_non_moveable = false;
-			this.highlight_required = true;
-			this.non_highlight_required = false;
 
 			this.defined_screen_width = me.game.viewport.width;
 			this.defined_screen_height = me.game.viewport.height;
@@ -45,12 +43,12 @@ game.play_screen = me.Stage.extend({
     		/************************/
     		/* player image plaque  */
     		/************************/
-        	this.player_plaque_panel = new game.generic_floating_panel(10, 10, 35, 33, "player_plaque", this.is_floating, this.is_persistent, this.non_moveable);
+        	this.player_plaque_panel = new game.generic_floating_panel_interface(null, 10, 10, 35, 33, "player_plaque", this.is_floating, this.non_persistent, this.non_moveable);
 
 					/*****************************/
     			/* player plaque information */
     			/*****************************/
-					me.game.world.addChild(this.player_plaque_panel, 100);
+					me.game.world.addChild(this.player_plaque_panel, 99);
 				/*******/
     		/* end */
     		/*******/
@@ -58,12 +56,12 @@ game.play_screen = me.Stage.extend({
 				/******************************************/
     		/* health + mana bars on player character */
     		/******************************************/
-        	this.player_mana_health_panel = new game.generic_floating_panel(45, 10, 101, 38, "player_mana_health_bar", this.is_floating, this.is_persistent, this.non_moveable);
+        	this.player_mana_health_panel = new game.generic_floating_panel_interface(null, 45, 10, 101, 38, "player_mana_health_bar", this.is_floating, this.is_persistent, this.non_moveable);
 
 					/******************************************/
     			/* displaying player mana and health bars */
     			/******************************************/
-					me.game.world.addChild(this.player_mana_health_panel, 100);
+					me.game.world.addChild(this.player_mana_health_panel, 99);
 				/*******/
     		/* end */
     		/*******/
@@ -74,8 +72,8 @@ game.play_screen = me.Stage.extend({
 			/**************************************/
     	/* floating message panel information */
     	/**************************************/
-				//this.floating_message_panel = new game.floating_generic_panel(this.defined_screen_width - 176, this.defined_screen_height - 107, 171, 123, "message_dialog_box_max", this.is_floating, this.is_persistent, this.is_moveable);
-				//me.game.world.addChild(this.floating_message_panel, 100);
+				//this.floating_message_panel = new game.generic_floating_panel(this.defined_screen_width - 176, this.defined_screen_height - 107, 171, 123, "message_dialog_box_max", this.is_floating, this.is_persistent, this.is_moveable);
+				//me.game.world.addChild(this.floating_message_panel, 99);
 			/*******/
     	/* end */
     	/*******/
@@ -86,14 +84,14 @@ game.play_screen = me.Stage.extend({
 				/****************************/
     		/* floating map panel image */
     		/****************************/
-				this.floating_map_panel = new game.generic_floating_panel(this.defined_screen_width - 110, 5, 105, 138, "map_interface", this.is_floating, this.is_persistent, this.is_moveable);
+				this.floating_map_panel = new game.generic_floating_panel_interface(null, this.defined_screen_width - 110, 5, 105, 138, "map_interface", this.is_floating, this.is_persistent, this.is_moveable);
 
-				/**********************/
-    		/* floating map icons */
-    		/*********************/
-				this.floating_map_panel.addChild(new game.generic_button_interface(3, 15, "map_attach", this.non_floating, this.is_persistent));
-				this.floating_map_panel.addChild(new game.generic_button_interface(84, 15, "map_minimize", this.non_floating, this.is_persistent));
-				this.floating_map_panel.addChild(new game.generic_button_interface(3, 117, "map_node_points", this.non_floating, this.is_persistent));
+				/************************/
+    		/* floating map buttons */
+    		/************************/
+				this.floating_map_panel.addChild(new game.generic_floating_button_interface(null, 3, 15, "map_attach", this.non_floating, this.is_persistent));
+				this.floating_map_panel.addChild(new game.generic_floating_button_interface(null, 84, 15, "map_minimize", this.non_floating, this.is_persistent));
+				this.floating_map_panel.addChild(new game.generic_floating_button_interface(null, 3, 117, "map_node_points", this.non_floating, this.is_persistent));
 
 				/****************************/
     		/* floating map panel title */

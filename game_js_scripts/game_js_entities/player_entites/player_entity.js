@@ -1,4 +1,4 @@
-game = game || {};
+var game = game || {};
 
 /**************************/
 /* player movement states */
@@ -20,9 +20,9 @@ const player_states =
   player_climb_down: "player_climb_down"
 };
 
-/*****************/
-/* player entity */
-/*****************/
+/******************************/
+/* class name : player_entity */
+/******************************/
 game.player_entity = me.Entity.extend(
   {
     /***************/
@@ -30,13 +30,14 @@ game.player_entity = me.Entity.extend(
     /***************/
     init: function (x, y, settings) {
       this.action = { enabled: false, other: null };
-
       this._super(me.Entity, 'init', [x, y, settings]);
-      this.name = "mainPlayer";
+      
+      this.name = settings.name.toString();
+
       this.body.collisionType = me.collision.types.PLAYER_OBJECT;
 
       this.body.removeShape(this.body.getShape(0));
-      this.body.addShape(new me.Rect(0, 0, 22, 57));
+      this.body.addShape(new me.Rect(0, 0, 22, 56));
 
       // max walking & jumping speed
       this.body.setMaxVelocity(2, 9);
@@ -284,7 +285,7 @@ game.player_entity = me.Entity.extend(
       /***************************************/
     	/* floating game log panel information */
     	/***************************************/
-			  this.floating_game_log_panel = new game.generic_floating_panel(7,  this.defined_screen_height - 62, 171, 56, "game_log_dialog_box_min", this.is_floating, this.is_persistent, this.non_moveable);
+			  this.floating_game_log_panel = new game.generic_floating_panel_interface(null, 7, this.defined_screen_height - 62, 221, 56, "game_log_dialog_box_max", this.is_floating, this.is_persistent, this.non_moveable);
 
       /******************************************/
 			/* floating game log current time display */
@@ -306,14 +307,14 @@ game.player_entity = me.Entity.extend(
 			/*********************************************/
 			/* floating game log player text information */
 			/*********************************************/
-        this.floating_game_log_panel.addChild(new game.generic_floating_textbox(12, this.defined_screen_height - 62, 1, 13, "Game Log Panel", 12), 100);
-			  this.floating_game_log_panel.addChild(this.floating_player_current_sequence, 100);
-        this.floating_game_log_panel.addChild(this.floating_player_previous_sequence, 100);
+        this.floating_game_log_panel.addChild(new game.generic_floating_textbox(12, this.defined_screen_height - 62, 1, 13, "Game Log Panel", 12));
+			  this.floating_game_log_panel.addChild(this.floating_player_current_sequence);
+        this.floating_game_log_panel.addChild(this.floating_player_previous_sequence);
 
 			/***********************************/
 			/* display floating game log panel */
 			/***********************************/
-			me.game.world.addChild(this.floating_game_log_panel, 100);
+			me.game.world.addChild(this.floating_game_log_panel, 99);
 			/*******/
 			/* end */
 			/*******/
@@ -322,11 +323,11 @@ game.player_entity = me.Entity.extend(
       /* player health bar initial values */
       /************************************/
       this.player_head_health_bar = me.pool.pull("player_head_health_bar", game.data.player_current_health, game.data.player_max_health, this.pos.x - 8, this.pos.y - 12, 35, 4);
-      me.game.world.addChild(this.player_head_health_bar, 100);
+      me.game.world.addChild(this.player_head_health_bar, 99);
       this.player_head_health_bar.updateOnce = true;
 
       this.player_plaque_health_bar = me.pool.pull("player_head_health_bar", game.data.player_current_health, game.data.player_max_mana, 48, 14, 95, 8);
-      me.game.world.addChild(this.player_plaque_health_bar, 100);
+      me.game.world.addChild(this.player_plaque_health_bar, 99);
       this.player_plaque_health_bar.isPersistent = true;
       this.player_plaque_health_bar.floating = true;
       this.player_plaque_health_bar.updateOnce = true;
@@ -335,11 +336,11 @@ game.player_entity = me.Entity.extend(
       /* player mana bar initial values */
       /**********************************/
       this.player_head_mana_bar = me.pool.pull("player_head_mana_bar", game.data.player_current_mana, game.data.player_max_mana, this.pos.x - 8, this.pos.y - 7, 35, 4);
-      me.game.world.addChild(this.player_head_mana_bar, 100);
+      me.game.world.addChild(this.player_head_mana_bar, 99);
       this.player_head_mana_bar.updateOnce = true;
 
       this.player_plaque_mana_bar = me.pool.pull("player_head_mana_bar", game.data.player_current_mana, game.data.player_max_mana, 48, 22, 95, 8);
-      me.game.world.addChild(this.player_plaque_mana_bar, 100);
+      me.game.world.addChild(this.player_plaque_mana_bar, 99);
       this.player_plaque_mana_bar.isPersistent = true;
       this.player_plaque_mana_bar.floating = true;
       this.player_plaque_mana_bar.updateOnce = true;
@@ -725,7 +726,7 @@ game.player_entity = me.Entity.extend(
           // change to the standing animation
           if (!this.renderable.isCurrentAnimation("stand")) {
             this.body.removeShape(this.body.getShape(0));
-            this.body.addShape(new me.Rect(0, 0, 22, 57));
+            this.body.addShape(new me.Rect(0, 0, 22, 56));
             this.anchorPoint.set(0.5, 0.5);
             this.change_animation("stand");
           }
@@ -746,7 +747,7 @@ game.player_entity = me.Entity.extend(
           // change to the walking right animation
           if (!this.renderable.isCurrentAnimation("walk")) {
             this.body.removeShape(this.body.getShape(0));
-            this.body.addShape(new me.Rect(0, 0, 22, 57));
+            this.body.addShape(new me.Rect(0, 0, 22, 56));
             this.anchorPoint.set(0.5, 0.5);
             this.change_animation("walk");
             this.displayplayerimpactdustTrails();
@@ -768,7 +769,7 @@ game.player_entity = me.Entity.extend(
           // change to the walking right animation
           if (!this.renderable.isCurrentAnimation("walk")) {
             this.body.removeShape(this.body.getShape(0));
-            this.body.addShape(new me.Rect(0, 0, 22, 57));
+            this.body.addShape(new me.Rect(0, 0, 22, 56));
             this.anchorPoint.set(0.5, 0.5);
             this.change_animation("walk");
             this.displayplayerimpactdustTrails();
@@ -788,7 +789,7 @@ game.player_entity = me.Entity.extend(
             //change to the climbing up animation
             if (!this.renderable.isCurrentAnimation("climb_over_up")) {
               this.body.removeShape(this.body.getShape(0));
-              this.body.addShape(new me.Rect(-3, -28, 28, 57));
+              this.body.addShape(new me.Rect(-3, -28, 28, 56));
               this.anchorPoint.set(0.5, 0.5);
               this.change_animation("climb_over_up", (function () { this.pos.y = this.pos.y - 60; me.input.unbindKey(me.input.KEY.U, "player_climb_up"); }).bind(this));
             }
@@ -835,7 +836,7 @@ game.player_entity = me.Entity.extend(
             // change to the climbing up animation
             if (!this.renderable.isCurrentAnimation("climb_up")) {
               this.body.removeShape(this.body.getShape(0));
-              this.body.addShape(new me.Rect(-4, 0, 28, 57));
+              this.body.addShape(new me.Rect(-4, 0, 28, 56));
               this.anchorPoint.set(0.5, 0.5);
               this.change_animation("climb_up");
             }
@@ -855,7 +856,7 @@ game.player_entity = me.Entity.extend(
             //change to the climbing up animation
             if (!this.renderable.isCurrentAnimation("climb_over_down")) {
               this.body.removeShape(this.body.getShape(0));
-              this.body.addShape(new me.Rect(-3, +29, 28, 57));
+              this.body.addShape(new me.Rect(-3, +29, 28, 56));
               this.anchorPoint.set(0.5, 0.5);
               this.change_animation("climb_over_down", (function () { this.pos.y = this.pos.y + 64; window.setTimeout(() => { me.input.bindKey(me.input.KEY.U, "player_climb_up");},4);}).bind(this));
             }
@@ -902,7 +903,7 @@ game.player_entity = me.Entity.extend(
             // change to the climbing up animation
             if (!this.renderable.isCurrentAnimation("climb_down")) {
               this.body.removeShape(this.body.getShape(0));
-              this.body.addShape(new me.Rect(-4, 0, 30, 57));
+              this.body.addShape(new me.Rect(-4, 0, 30, 56));
               this.anchorPoint.set(0.5, 0.5);
               this.change_animation("climb_down");
             }
@@ -921,7 +922,7 @@ game.player_entity = me.Entity.extend(
           this.renderable.flipX(false)
           if (!this.renderable.isCurrentAnimation("crawl")) {
             this.body.removeShape(this.body.getShape(0));
-            this.body.addShape(new me.Rect(-15, 0, 50, 31));
+            this.body.addShape(new me.Rect(-15, 0, 50, 30));
             this.anchorPoint.set(0.5, 0.5);
             this.change_animation("crawl");
           }
@@ -939,7 +940,7 @@ game.player_entity = me.Entity.extend(
           this.renderable.flipX(true)
           if (!this.renderable.isCurrentAnimation("crawl")) {
             this.body.removeShape(this.body.getShape(0));
-            this.body.addShape(new me.Rect(-15, 0, 50, 31));
+            this.body.addShape(new me.Rect(-15, 0, 50, 30));
             this.anchorPoint.set(0.5, 0.5);
             this.change_animation("crawl");
           }
