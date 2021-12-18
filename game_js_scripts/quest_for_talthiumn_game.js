@@ -62,8 +62,9 @@ game =
   /*************************************************/ 
   collectObjects() 
   {
-    game.game_keys = me.game.world.getChildByProp("name", "game_key");
-    game.castle_level_doors = me.game.world.getChildByProp("name", "castle_level_door");
+    //game.game_keys = me.game.world.getChildByProp("name", "game_key");
+    //game.castle_level_doors = me.game.world.getChildByProp("name", "castle_level_door");
+    return;
   },
    
   // Run on page load.
@@ -242,5 +243,5 @@ game =
       throw "Error: No image named `" + name + "` (Did you forget to include the resource?)";
     }
     return this.image_result;
-  },
+  }
 };

@@ -1,6 +1,6 @@
 /*
  * MelonJS Game Engine
- * Copyright (C) 2011 - 2019 Olivier Biot
+ * Copyright (C) 2011 - 2020 Olivier Biot
  * http://www.melonjs.org
  */
 
@@ -13,7 +13,11 @@
      * @classdesc
      * a simple debug panel plugin <br>
      * <img src="images/debugPanel.png"/> <br>
-     * the debug panel provides the following information : <br>
+     * <b>usage : </b><br>
+     * &bull; upon loading the debug panel, it will be automatically registered under me.plugins.debugPanel <br>
+     * &bull; you can then press the default "s" key to show or hide the panel, or use me.plugins.debugPanel.show() and me.plugins.debugPanel.show(), or add #debug as a parameter to your URL e.g. http://myURL/index.html#debug <br>
+     * &bull; default key can be configured using the following parameters in the url : e.g. http://myURL/index.html#debugToggleKey=d <br>
+     * <b>the debug panel provides the following information : </b><br>
      * &bull; amount of total objects currently active in the current stage <br>
      * &bull; amount of draws operation <br>
      * &bull; amount of body shape (for collision) <br>
@@ -28,10 +32,6 @@
      * &bull; the hitbox or bounding box for all objects <br>
      * &bull; current velocity vector <br>
      * &bull; quadtree spatial visualization <br>
-     * usage : <br>
-     * &bull; upon loading the debug panel, it will be automatically registered under me.plugins.debugPanel <br>
-     * &bull; you can then press the default "s" key to show or hide the panel, or use me.plugins.debugPanel.show() and me.plugins.debugPanel.show(), or add #debug as a parameter to your URL e.g. http://myURL/index.html#debug <br>
-     * &bull; default key can be configured using the following parameters in the url : e.g. http://myURL/index.html#debugToggleKey=d
      * @class
      * @hideconstructor
      * @name DebugPanel
@@ -98,27 +98,22 @@
 
     var DEBUG_HEIGHT = 50;
 
-    var Counters = me.Object.extend({
-        init : function (stats) {
-            this.stats = {};
-            this.reset(stats);
-        },
-
-        reset : function (stats) {
-            var self = this;
-            (stats || Object.keys(this.stats)).forEach(function (stat) {
-                self.stats[stat] = 0;
-            });
-        },
-
-        inc : function (stat, value) {
-            this.stats[stat] += (value || 1);
-        },
-
-        get : function (stat) {
-            return this.stats[stat];
-        }
-    });
+    var Counters = function(name) {
+        this.stats = [];
+        this.reset(this.stats);
+    }
+    Counters.prototype.reset = function(stats) {
+        var self = this;
+        (stats || Object.keys(this.stats)).forEach(function (stat) {
+            self.stats[stat] = 0;
+        });
+    }
+    Counters.prototype.inc = function(stat, value) {
+        this.stats[stat] += (value || 1);
+    }
+    Counters.prototype.get = function(stat) {
+        return this.stats[stat] || 0;
+    }
 
     // embedded bitmap font data
     var fontDataSource =
@@ -235,7 +230,7 @@
             this.isKinematic = false;
 
             // minimum melonJS version expected
-            this.version = "8.0.0";
+            this.version = "9.0.0";
 
             // to hold the debug options
             // clickable rect area
@@ -356,7 +351,6 @@
             me.debug.renderQuadTree = me.debug.renderQuadTree || hash.quadtree || false;
 
             var _this = this;
-            var bounds = new me.Rect(0, 0, 0, 0);
 
             // patch me.game.update
             me.plugin.patch(me.game, "update", function (dt) {
@@ -380,75 +374,86 @@
                 _this.frameDrawTime = window.performance.now() - frameDrawStartTime;
             });
 
-            // patch sprite.js
-            me.plugin.patch(me.Sprite, "draw", function (renderer) {
+            // patch renderable.js
+            me.plugin.patch(me.Renderable, "postDraw", function (renderer) {
 
-                // call the original me.Sprite.draw function
-                this._patched(renderer);
+                // call the original me.Renderable.postDraw function
+                this._patched.apply(this, arguments);
+
+
+                // increment the sprites counter
+                if (typeof this.image !== "undefined") {
+                    _this.counters.inc("sprites");
+                }
+
+                // increment the bound counter
+                _this.counters.inc("bounds");
+
+                // increment the children counter
+                if (this instanceof me.Container) {
+                    _this.counters.inc("children");
+                }
+
 
                 // don't do anything else if the panel is hidden
                 if (_this.visible) {
 
-                    // increment the sprites counter
-                    _this.counters.inc("sprites");
+                    // omit following object as they are patched later through different methods
+                    // XXX TODO: make this patched method more generic at Renderable level
+                    if (!(this instanceof me.Entity) && !(this instanceof me.Text) &&
+                        !(this instanceof me.BitmapText) && !(this instanceof me.Camera2d)
+                        && !(this instanceof me.ImageLayer)) {
 
-                    // draw the sprite rectangle
-                    if (me.debug.renderHitBox) {
-                        var bounds = this.getBounds();
-                        var ax = this.anchorPoint.x * bounds.width,
-                            ay = this.anchorPoint.y * bounds.height;
+                        // draw the renderable bounding box
+                        if (me.debug.renderHitBox && this.getBounds().isFinite()) {
 
-                        var ancestor = this.ancestor;
-                        if (ancestor instanceof me.Container && ancestor.root === false) {
-                            ax -= ancestor._absPos.x;
-                            ay -= ancestor._absPos.y;
-                        } else if (ancestor instanceof me.Entity) {
-                            ancestor = ancestor.ancestor;
-                            if (ancestor instanceof me.Container && ancestor.root === false) {
-                                // is this correct ???
-                                ax = ay = 0;
-                            }
-                        }
+                            if (typeof this.ancestor !== "undefined") {
+                                var absolutePosition = this.ancestor.getAbsolutePosition();
 
-                        // translate back as the bounds position
-                        // is already adjusted to the anchor Point
-                        renderer.translate(ax, ay);
-
-                        renderer.setColor("green");
-                        renderer.stroke(bounds);
-
-                        renderer.translate(-ax, -ay);
-
-                        // the sprite mask if defined
-                        if (typeof this.mask !== "undefined") {
-                            renderer.setColor("orange");
-                            renderer.stroke(this.mask);
-                        }
-
-                        if (typeof this.body !== "undefined") {
-                            if (!this.currentTransform.isIdentity()) {
-                                // if any transform were applied to me.Sprite
-                                // we need to reset the context so that we
-                                // can draw the body shapes properly
                                 renderer.save();
-                                renderer.resetTransform();
-                                renderer.translate(-ax, -ay);
+
+                                // if this object of this renderable parent is not the root container
+                                if (!this.root && !this.ancestor.root && this.ancestor.floating) {
+                                    renderer.translate(
+                                        -absolutePosition.x,
+                                        -absolutePosition.y
+                                    );
+                                }
                             }
-                            renderer.translate(this.pos.x, this.pos.y);
-                            // draw all defined shapes
-                            renderer.setColor("red");
-                            for (var i = this.body.shapes.length, shape; i--, (shape = this.body.shapes[i]);) {
-                                renderer.stroke(shape);
-                                _this.counters.inc("shapes");
-                            }
-                            if (!this.currentTransform.isIdentity()) {
+
+                            // draw the renderable bounds
+                            renderer.setColor("green");
+                            renderer.stroke(this.getBounds());
+
+                            if (typeof this.ancestor !== "undefined") {
                                 renderer.restore();
+                            }
+
+                            // the sprite mask if defined
+                            if (typeof this.mask !== "undefined") {
+                                renderer.setColor("orange");
+                                renderer.stroke(this.mask);
+                            }
+
+                            if (typeof this.body !== "undefined") {
+                                var bounds = this.getBounds();
+                                renderer.translate(bounds.x, bounds.y);
+
+                                renderer.setColor("orange");
+                                renderer.stroke(this.body.getBounds());
+
+                                // draw all defined shapes
+                                renderer.setColor("red");
+                                for (var i = this.body.shapes.length, shape; i--, (shape = this.body.shapes[i]);) {
+                                    renderer.stroke(shape);
+                                    _this.counters.inc("shapes");
+                                }
+                                renderer.translate(-bounds.x, -bounds.y);
                             }
                         }
                     }
                 }
             });
-
 
             me.plugin.patch(me.BitmapText, "draw", function (renderer) {
                 // call the original me.Sprite.draw function
@@ -468,9 +473,8 @@
                         renderer.save();
                     }
 
-                    renderer.setColor("orange");
+                    renderer.setColor("green");
                     renderer.stroke(bounds);
-                    _this.counters.inc("bounds");
 
                     if (typeof this.ancestor === "undefined") {
                         renderer.restore();
@@ -488,28 +492,9 @@
                     if (typeof this.ancestor === "undefined") {
                         renderer.save();
                     }
-                    renderer.setColor("orange");
+                    renderer.setColor("green");
                     renderer.stroke(this.getBounds());
-                    _this.counters.inc("bounds");
-                    if (typeof this.ancestor === "undefined") {
-                        renderer.restore();
-                    }
-                }
-            });
 
-            // patch font.js
-            me.plugin.patch(me.Text, "drawStroke", function (renderer, text, x, y) {
-                // call the original me.Font.drawStroke function
-                this._patched.apply(this, arguments);
-
-                // draw the font rectangle
-                if (_this.visible && me.debug.renderHitBox) {
-                    if (typeof this.ancestor === "undefined") {
-                        renderer.save();
-                    }
-                    renderer.setColor("orange");
-                    renderer.stroke(this.getBounds());
-                    _this.counters.inc("bounds");
                     if (typeof this.ancestor === "undefined") {
                         renderer.restore();
                     }
@@ -520,33 +505,31 @@
             me.plugin.patch(me.Entity, "postDraw", function (renderer) {
                 // don't do anything else if the panel is hidden
                 if (_this.visible) {
-                    // increment the bounds counter
-                    _this.counters.inc("bounds");
 
                     // check if debug mode is enabled
                     if (me.debug.renderHitBox) {
                         renderer.save();
 
                         renderer.translate(
-                            -this.pos.x - this.body.pos.x - this.ancestor._absPos.x,
-                            -this.pos.y - this.body.pos.y - this.ancestor._absPos.y
+                            -this.pos.x - this.body.getBounds().x - this.ancestor.getAbsolutePosition().x,
+                            -this.pos.y - this.body.getBounds().y - this.ancestor.getAbsolutePosition().y
                         );
 
                         if (this.renderable instanceof me.Renderable) {
                             renderer.translate(
-                                -this.anchorPoint.x * this.body.width,
-                                -this.anchorPoint.y * this.body.height
+                                -this.anchorPoint.x * this.body.getBounds().width,
+                                -this.anchorPoint.y * this.body.getBounds().height
                             );
                         }
 
+                        renderer.translate(
+                            this.pos.x + this.ancestor.getAbsolutePosition().x,
+                            this.pos.y + this.ancestor.getAbsolutePosition().y
+                        );
+
                         // draw the bounding rect shape
                         renderer.setColor("orange");
-                        renderer.stroke(this.getBounds());
-
-                        renderer.translate(
-                            this.pos.x + this.ancestor._absPos.x,
-                            this.pos.y + this.ancestor._absPos.y
-                        );
+                        renderer.stroke(this.body.getBounds());
 
                         // draw all defined shapes
                         renderer.setColor("red");
@@ -558,18 +541,16 @@
                     }
 
                     if (me.debug.renderVelocity && (this.body.vel.x || this.body.vel.y)) {
-                        bounds.copy(this.getBounds());
-                        bounds.pos.sub(this.ancestor._absPos);
-                        // draw entity current velocity
-                        var x = bounds.width / 2;
-                        var y = bounds.height / 2;
+                        var bounds = this.getBounds();
+                        var hWidth = bounds.width / 2;
+                        var hHeight = bounds.height / 2;
 
                         renderer.save();
                         renderer.setLineWidth(1);
 
                         renderer.setColor("blue");
-                        renderer.translate(-x, -y);
-                        renderer.strokeLine(0, 0, ~~(this.body.vel.x * (bounds.width / 2)), ~~(this.body.vel.y * (bounds.height / 2)));
+                        renderer.translate(0, -hHeight);
+                        renderer.strokeLine(0, 0, ~~(this.body.vel.x * hWidth), ~~(this.body.vel.y * hHeight));
                         _this.counters.inc("velocity");
 
                         renderer.restore();
@@ -577,44 +558,6 @@
                 }
                 // call the original me.Entity.postDraw function
                 this._patched.apply(this, arguments);
-            });
-
-            // patch container.js
-            me.plugin.patch(me.Container, "draw", function (renderer, rect) {
-                // call the original me.Container.draw function
-                this._patched.apply(this, arguments);
-
-                // check if debug mode is enabled
-                if (!_this.visible) {
-                    // don't do anything else if the panel is hidden
-                    return;
-                }
-
-                // increment counters
-                _this.counters.inc("bounds");
-                _this.counters.inc("children");
-
-                if (me.debug.renderHitBox) {
-                    renderer.save();
-                    renderer.setLineWidth(1);
-
-                    if (!this.root) {
-                        renderer.translate(
-                            -this._absPos.x,
-                            -this._absPos.y
-                        );
-                    }
-
-                    // draw the bounding rect shape
-                    renderer.setColor("orange");
-                    renderer.stroke(this.getBounds());
-
-                    // draw the children bounding rect shape
-                    renderer.setColor("purple");
-                    renderer.stroke(this.childBounds);
-
-                    renderer.restore();
-                }
             });
         },
 
@@ -664,13 +607,13 @@
         /** @private */
         onClick : function (e)  {
             // check the clickable areas
-            if (this.area.renderHitBox.containsPoint(e.gameX, e.gameY)) {
+            if (this.area.renderHitBox.contains(e.gameX, e.gameY)) {
                 me.debug.renderHitBox = !me.debug.renderHitBox;
-            } else if (this.area.renderVelocity.containsPoint(e.gameX, e.gameY)) {
+            } else if (this.area.renderVelocity.contains(e.gameX, e.gameY)) {
                 // does nothing for now, since velocity is
                 // rendered together with hitboxes (is a global debug flag required?)
                 me.debug.renderVelocity = !me.debug.renderVelocity;
-            } else if (this.area.renderQuadTree.containsPoint(e.gameX, e.gameY)) {
+            } else if (this.area.renderQuadTree.contains(e.gameX, e.gameY)) {
                 me.debug.renderQuadTree = !me.debug.renderQuadTree;
             }
             // force repaint
@@ -688,7 +631,7 @@
                 if (_alpha > 0.0) {
                     renderer.save();
                     renderer.setColor("rgba(255,0,0," + _alpha + ")");
-                    renderer.fillRect(bounds.pos.x, bounds.pos.y, bounds.width, bounds.height);
+                    renderer.fillRect(bounds.left, bounds.top, bounds.width, bounds.height);
                     renderer.restore();
                 }
             } else {

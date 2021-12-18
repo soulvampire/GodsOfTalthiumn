@@ -1,11 +1,10 @@
 var game = game || {};
-
 /***************************************/
 /* class name : generic_floating_panel */
 /***************************************/
 game.generic_floating_panel_interface = me.Container.extend( {
     /******************************************/
-    /*           panel constructor            */
+    /*           panel init function          */
     /******************************************/
     /* panel_posX = X cordinate               */
     /* panel_posY = Y cordinate               */
@@ -16,8 +15,9 @@ game.generic_floating_panel_interface = me.Container.extend( {
     /* is_panel_persistent = true or false    */
     /******************************************/
 		init: function (panel_name, panel_posX, panel_posY, panel_width, panel_height, panel_image_name, is_panel_floating, is_panel_persistent, is_panel_moveable) {
-
-        // call the constructor
+        /**************************************/
+        /* generic floating panel constructor */
+        /**************************************/
         this._super(me.Container, "init", [panel_posX, panel_posY, panel_width, panel_height]);
         
         this.anchorPoint.set(0.0, 0.0);
@@ -54,7 +54,7 @@ game.generic_floating_panel_interface = me.Container.extend( {
         this.hover = false;
         // to memorize where we grab the shape
         this.grabOffset = new me.Vector2d(0.0,0.0);
-    },
+      },
 
     onActivateEvent: function () {
         // register on the global pointermove event
@@ -85,7 +85,6 @@ game.generic_floating_panel_interface = me.Container.extend( {
      */
     pointerMove: function (event) {
       this.hover = this.getBounds().containsPoint(event.gameX, event.gameY);
-      console.log("panel name " + this.name.toString())
 				if(this.isMoveable)
         {
           if (this.selected) 

@@ -25,13 +25,20 @@ const player_states =
 /******************************/
 game.player_entity = me.Entity.extend(
   {
-    /***************/
-    /* constructor */
-    /***************/
+    /******************************/
+    /*    player init function    */
+    /******************************/
+    /* x = X cordinate            */
+    /* y = Y cordinate            */
+    /* settings = array of values */
+    /******************************/
     init: function (x, y, settings) {
-      this.action = { enabled: false, other: null };
+      /*****************************/
+      /* player entity constructor */
+      /*******************(*********/
       this._super(me.Entity, 'init', [x, y, settings]);
       
+      this.action = { enabled: false, other: null };
       this.name = settings.name.toString();
 
       this.body.collisionType = me.collision.types.PLAYER_OBJECT;
@@ -326,11 +333,11 @@ game.player_entity = me.Entity.extend(
       me.game.world.addChild(this.player_head_health_bar, 99);
       this.player_head_health_bar.updateOnce = true;
 
-      this.player_plaque_health_bar = me.pool.pull("player_head_health_bar", game.data.player_current_health, game.data.player_max_mana, 48, 14, 95, 8);
+      /*this.player_plaque_health_bar = me.pool.pull("player_head_health_bar", game.data.player_current_health, game.data.player_max_mana, 48, 14, 95, 8);
       me.game.world.addChild(this.player_plaque_health_bar, 99);
       this.player_plaque_health_bar.isPersistent = true;
       this.player_plaque_health_bar.floating = true;
-      this.player_plaque_health_bar.updateOnce = true;
+      this.player_plaque_health_bar.updateOnce = true;*/
 
       /**********************************/
       /* player mana bar initial values */
@@ -339,11 +346,11 @@ game.player_entity = me.Entity.extend(
       me.game.world.addChild(this.player_head_mana_bar, 99);
       this.player_head_mana_bar.updateOnce = true;
 
-      this.player_plaque_mana_bar = me.pool.pull("player_head_mana_bar", game.data.player_current_mana, game.data.player_max_mana, 48, 22, 95, 8);
+      /*this.player_plaque_mana_bar = me.pool.pull("player_head_mana_bar", game.data.player_current_mana, game.data.player_max_mana, 48, 22, 95, 8);
       me.game.world.addChild(this.player_plaque_mana_bar, 99);
       this.player_plaque_mana_bar.isPersistent = true;
       this.player_plaque_mana_bar.floating = true;
-      this.player_plaque_mana_bar.updateOnce = true;
+      this.player_plaque_mana_bar.updateOnce = true;*/
     },
 
     /**************************/
@@ -464,8 +471,8 @@ game.player_entity = me.Entity.extend(
         //player dust trail when falling down and landing on platform or ground
         if ((this.player_climbable_states !== player_states.player_on_climbable) && (this.player_climbable_states !== player_states.player_in_climbable)) {
           this.playerimpactdusttrails = me.pool.pull("impact_dust_trails", this.pos.x, this.pos.y);
-          this.playerPosition = me.game.viewport.worldToLocal(this.pos.x, this.pos.y)
-          this.playerimpactdusttrails.displayImpactDustTrails(Math.floor(this.playerPosition.x), Math.floor(this.playerPosition.y) + 53);
+          this.player_position = me.game.viewport.worldToLocal(this.pos.x, this.pos.y)
+          this.playerimpactdusttrails.displayImpactDustTrails(Math.floor(this.player_position.x), Math.floor(this.player_position.y) + 53);
         }
       }
 
@@ -530,12 +537,10 @@ game.player_entity = me.Entity.extend(
           if ((other.name === "climbable_ladder") && (other.type === "platform_pass_through")) {
             if ((Math.floor(this.pos.y) <= other.ladder_top_position) && (Math.floor(this.pos.x) >= other.ladder_left_position) && (Math.floor(this.pos.x) <= other.ladder_right_position)) {
               this.player_climbable_states = player_states.player_on_climbable;
-              console.log("on ladder");
             }
             else if (((Math.floor(this.pos.x) >= other.ladder_left_position) && (Math.floor(this.pos.y) >= other.ladder_top_position)) &&
               ((Math.floor(this.pos.x) <= other.ladder_right_position) && (Math.floor(this.pos.y) <= other.ladder_bottom_position))) {
               this.player_climbable_states = player_states.player_in_climbable;
-              console.log("in ladder");
             }
           }
 
@@ -983,8 +988,8 @@ game.player_entity = me.Entity.extend(
                                   this.floating_player_previous_sequence.updateGameLogText(this.floating_player_current_sequence.retrievGameLogText());
                                   this.floating_player_current_sequence.updateGameLogText("Player current sequence events");
                                 }, 2000);
-        this.player_plaque_health_bar.setPlayerHealthBar(game.data.player_current_health);
-        this.player_plaque_health_bar.updateOnce = true;
+        /*this.player_plaque_health_bar.setPlayerHealthBar(game.data.player_current_health);
+        this.player_plaque_health_bar.updateOnce = true;*/
         // hurt blood splatter
         this.bloodtrails = me.pool.pull("blood_trails", Math.floor(this.pos.x), Math.floor(this.pos.y));
         this.bloodPosition = me.game.viewport.worldToLocal(Math.floor(this.pos.x), Math.floor(this.pos.y));

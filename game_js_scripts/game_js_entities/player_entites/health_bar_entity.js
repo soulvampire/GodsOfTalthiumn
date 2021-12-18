@@ -14,6 +14,14 @@ game.generic_health_bar_entity = me.Renderable.extend( {
   /* health_bar_height = health bar height(px) */
 	/*********************************************/
     init: function (hit_points, max_health_points, hp_pos_x, hp_pos_y, health_bar_width, health_bar_height) {
+    /**********************************/
+    /*    health bar init function    */
+		/**********************************/
+    /* hp_pos_x = X cordinate         */
+    /* hp_pos_y = Y cordinate         */
+    /* health_bar_width = width(px)   */
+		/* health_bar_height = height(px) */
+    /**********************************/
       this._super(me.Renderable, "init", [hp_pos_x, hp_pos_y, health_bar_width, health_bar_height]);
       this.name = "generic_health_bar";
       this.anchorPoint.set(0.0, 0.0);

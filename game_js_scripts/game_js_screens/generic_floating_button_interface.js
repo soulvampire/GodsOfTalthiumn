@@ -5,7 +5,7 @@ var game = game || {};
 /*****************************************/
 game.generic_floating_button_interface = me.GUI_Object.extend ( {
 	/*******************************************/
-	/*          gui button constructor         */
+	/*          gui button init function       */
 	/*******************************************/
 	/* button_posX = X cordinate               */
 	/* button_posY = Y cordinate               */
@@ -13,13 +13,22 @@ game.generic_floating_button_interface = me.GUI_Object.extend ( {
 	/* is_button_floating = true or flase      */
 	/* is_button_persistent = true or false    */
 	/*******************************************/
-  init: function (button_name, button_posX, button_posY, button_image_name, is_button_floating, is_button_persistent) {
-
-		this._super(me.GUI_Object, "init", [button_posX, button_posY, {
+  init: function (button_name, button_pos_x, button_pos_y, button_image_name, is_button_floating, is_button_persistent) {
+		/***************************************/
+    /* generic floating button constructor */
+    /***************************************/
+		this._super(me.GUI_Object, "init", [button_pos_x, button_pos_y, {
 			image: game.interface_sprites,
       region: button_image_name + "_normal"
 		}]);
 
+		/************************************************/
+    /*         button images for each state         */
+		/************************************************/
+		/* button_normal_region = normal button state   */
+		/* button_hover_region = hover button state     */
+		/* button_clicked_region = pressed button state */
+		/************************************************/
 		this.button_normal_region = game.interface_sprites.getRegion(button_image_name + "_normal");
 		this.button_hover_region = game.interface_sprites.getRegion(button_image_name + "_highlight");
     this.button_clicked_region = game.interface_sprites.getRegion(button_image_name + "_pressed");
@@ -31,7 +40,6 @@ game.generic_floating_button_interface = me.GUI_Object.extend ( {
 		this.isPersistent = is_button_persistent;
 
 		this.isKinematic = false;
-		this.inViewport = true;
 
 		this.floating = is_button_floating;
 
@@ -51,14 +59,14 @@ game.generic_floating_button_interface = me.GUI_Object.extend ( {
 	/**
 	 * function called when the pointer is leaving the object area
 	 */
-		onOut : function (/* event */) {
+		onOut : function (event) {
 			this.setRegion(this.button_normal_region);
 		},
 
 	/**
 	 * function called when the object is clicked on
 	 */
-		onClick : function (/*event*/) {
+		onClick : function (event) {
 			this.setRegion(this.button_clicked_region);
 			// don't propagate the event
 			return false;
@@ -67,7 +75,7 @@ game.generic_floating_button_interface = me.GUI_Object.extend ( {
 	/**
 	 * function called when the pointer button is released
 	 */
-		onRelease : function (/* event */) {
+		onRelease : function (event) {
 			this.setRegion(this.button_hover_region);
 			// don't propagate the event
 			return false;

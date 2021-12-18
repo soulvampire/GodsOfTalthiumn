@@ -5,7 +5,7 @@ var game = game || {};
 game.generic_floating_textbox = me.Renderable.extend(
 	{
 		/*********************************************************/
-		/*          generic floating textbox constructor         */
+		/*        generic floating textbox init function         */
 		/*********************************************************/
 		/* floating_text_posX = x value screen position(px)      */
 		/* floating_text_posY = y value screen position(px)      */
@@ -15,6 +15,9 @@ game.generic_floating_textbox = me.Renderable.extend(
 		/* mana_bar_height = text field size(pt)                 */
 		/*********************************************************/
 		init: function (floating_text_posX, floating_text_posY, floating_text_box_width, floating_text_box_height, floating_text_field, floating_text_size) {
+			/****************************************/
+      /* generic floating textbox constructor */
+      /****************************************/
 			this._super(me.Renderable, "init", [0, 0, floating_text_box_width, floating_text_box_height]);
 
 			this.defined_screen_width = me.game.viewport.width;

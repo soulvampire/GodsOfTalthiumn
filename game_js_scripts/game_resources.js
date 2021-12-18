@@ -41,10 +41,10 @@ game.resources = [
     /****************/
     /* items chests */
     /****************/  
-        {name: "rpg_item_chest", type: "image", src: "/game_data/game_images/game_map_images/game_world01/castle_level_items/rpg_item_chests.png"},
-        {name: "rpg_chest_keys", type: "image", src: "/game_data/game_images/game_map_images/game_world01/castle_level_items/rpg_chest_keys.png"},
-        {name: "rpg_doors",  type: "image", src: "/game_data/game_images/game_map_images/game_world01/castle_level_items/rpg_doors.png"},
-        {name: "rpg_door_locks", type: "image", src: "/game_data/game_images/game_map_images/game_world01/castle_level_items/rpg_door_locks.png"},
+        {name: "rpg_item_chest", type: "image", src: "/game_data/game_images/game_map_images/game_world01/castle_level_items/castle_level_game_objects/rpg_item_chests.png"},
+        {name: "rpg_chest_keys", type: "image", src: "/game_data/game_images/game_map_images/game_world01/castle_level_items/castle_level_game_objects/rpg_chest_keys.png"},
+        {name: "rpg_doors",  type: "image", src: "/game_data/game_images/game_map_images/game_world01/castle_level_items/castle_level_game_objects/rpg_doors.png"},
+        {name: "rpg_door_locks", type: "image", src: "/game_data/game_images/game_map_images/game_world01/castle_level_items/castle_level_game_objects/rpg_door_locks.png"},
         
     /***************************/
     /* floating platform image */

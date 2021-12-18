@@ -4,7 +4,7 @@ var game = game || {};
 /****************************************/
 game.generic_mana_bar_entity = me.Renderable.extend( {
 	/*******************************************/
-	/*       health bar entity constructor     */
+	/*      health bar entity init function    */
 	/*******************************************/
 	/* hitPoints = damage value                */
 	/* max_mana_points = max mana points       */
@@ -14,6 +14,14 @@ game.generic_mana_bar_entity = me.Renderable.extend( {
   /* mana_bar_height = health bar height(px) */
 	/*******************************************/
 		init: function (hitPoints, max_mana_points, hp_pos_x, hp_pos_y, mana_bar_width, mana_bar_height) {
+		/********************************/
+    /*   mana bar init function     */
+    /********************************/
+    /* hp_pos_x = X cordinate       */
+    /* hp_pos_y = Y cordinate       */
+    /* mana_bar_width = width(px)   */
+		/* mana_bar_height = height(px) */
+    /********************************/
 			this._super(me.Renderable, "init", [hp_pos_x, hp_pos_y, mana_bar_width, mana_bar_height]);
 			this.name = "gereric_mana_bar";
 			this.anchorPoint.set(0.0, 0.0);
